@@ -13,7 +13,7 @@
   position: relative;
   height: 180px;
   border-radius: 24px;
-  background: #e0e6f0;           /* placeholder: copy from Figma */
+  background: #e0e6f0;          
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -29,7 +29,6 @@
   color: var(--deep-purple);
 }
 
-/* price + bookmark */
 .card-row {
   display: flex;
   justify-content: space-between;
@@ -41,7 +40,7 @@
 .card-save-button {
   border: none;
   background: transparent;
-  color: #8b8fa3;                /* gray from the design */
+  color: #8b8fa3;                
   cursor: pointer;
   padding: 4px;
 }
@@ -60,7 +59,7 @@
   margin-top: 20px;
   padding: 12px 16px;
   border-radius: 16px;
-  background: #f5f7fb;           /* placeholder: copy from Figma */
+  background: #f5f7fb;          
   font-size: 0.85rem;
   color: #4b5563;
 }
