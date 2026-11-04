@@ -4,9 +4,15 @@
   background: #fbf9fc;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+
+  --main-color: #251e2b;
 }
 
-* { box-sizing: border-box; }
+*, *::before, *::after {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0; 
+  }
 
 body { min-width: 320px; min-height: 100vh; margin: 0; }
 
@@ -21,3 +27,13 @@ body { min-width: 320px; min-height: 100vh; margin: 0; }
 .welcome h1 { margin: 0; color: #4b2e63; font-size: clamp(3rem, 10vw, 6rem); }
 .welcome p { color: #6d6575; }
 .welcome .eyebrow { color: #6c4a8b; font-size: .8rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  cursor: pointer;
+}
+

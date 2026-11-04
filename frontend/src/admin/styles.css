@@ -1,0 +1,105 @@
+/* --------- Admin Dashboard ------------ */
+.admin-container {
+    padding: 1.5rem 2rem;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+}
+
+.dashboard-title {
+    margin: 2rem 0;
+}
+
+.dashboard-title p {
+    opacity: 50%;
+    letter-spacing: 0.09rem;
+}
+
+.admin-stat {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 1rem;
+}
+
+/* --------- Admin Dashboard ------------ */
+
+/* --------- Admin Header ------------ */
+header {
+  background: rgba(218, 217, 217, 0.45);
+  backdrop-filter: blur(1rem);
+  -webkit-backdrop-filter: blur(1rem);
+
+  border: 0.0625rem solid rgba(255, 255, 255, 0.35);
+  border-radius: 0.875rem;
+
+  box-shadow:
+    0 0.5rem 2rem rgba(31, 38, 135, 0.12),
+    inset 0 0.0625rem 0 rgba(255, 255, 255, 0.6);
+
+
+    padding: 1.7rem 2rem;
+
+  display: flex;
+  justify-content: space-between;
+  color: var(--main-color);
+}
+
+.right-header {
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+}
+
+.header-role {
+    font-weight: 600;
+}
+
+.header-icons {
+    display: flex;
+    gap: 1.5rem;
+}
+/* --------- Admin Header ------------ */
+
+/* --------- Admin Navigation ------------ */
+#admin-nav {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(1rem);
+    -webkit-backdrop-filter: blur(1rem);
+
+    border: 0.0625rem solid rgba(255, 255, 255, 0.35);
+    border-radius: 0.875rem;
+
+    box-shadow:
+        0 0.5rem 2rem rgba(31, 38, 135, 0.12),
+        inset 0 0.0625rem 0 rgba(255, 255, 255, 0.6);
+
+    padding: 1.5rem 2rem;
+    margin-top: 2rem;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-title {
+    opacity: 40%;
+    letter-spacing: 0.2rem;
+}
+
+.nav-panel {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    font-weight: 600;
+}
+
+.nav-panel:hover {
+    cursor: pointer;
+}
+
+.nav:hover {
+    border-bottom: 2px solid var(--main-color);
+}
+/* --------- Admin Navigation ------------ */
+
+
+
+

@@ -1,0 +1,161 @@
+/* --------- Stat Card ------------ */
+.card-container {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(1rem);
+    -webkit-backdrop-filter: blur(1rem);
+
+    border: 0.0625rem solid rgba(255, 255, 255, 0.35);
+    border-radius: 0.875rem;
+
+    box-shadow:
+        0 0.5rem 2rem rgba(31, 38, 135, 0.12),
+        inset 0 0.0625rem 0 rgba(255, 255, 255, 0.6);
+
+    display: flex;
+    flex-direction: column;
+    min-width: 40rem;
+    padding: 1rem;
+}
+
+.card-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.card-title h4 {
+    font-weight: 500;
+}
+
+.card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.card-total {
+    font-size: 4rem;
+    font-weight: 700;
+}
+
+.card-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    color: inherit;
+    line-height: 1;
+    padding-bottom: 0.5rem;
+}
+
+
+.card-link:hover {
+    border-bottom: 1px solid var(--main-color);
+}
+
+
+/* --------- Stat Card ------------ */
+
+/* --------- Agent/Listing Grid ------------ */
+.grid-container {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    justify-content: start;
+    min-width: 40rem;
+    
+    border: 0.5px solid #615f5f8a;
+    box-shadow:
+        0 0.5rem 2rem rgba(31, 38, 135, 0.12),
+        inset 0 0.0625rem 0 rgba(255, 255, 255, 0.6);
+        padding: 1rem 2rem;
+        border-radius: 1rem;
+
+    margin: 1rem 0;
+    gap: 1.5rem;
+}
+
+.grid-logo {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 5rem;
+    background-color: var(--main-color);
+}
+
+.grid-logo.listing {
+    min-width: 3.5rem;
+    min-height: 3rem;
+    border-radius: 0.5rem;
+    background-color: #818181;
+}
+
+.grid-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.grid-name {
+    font-size: 1rem;
+}
+
+.grid-sub-details {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #585757;
+    font-size: 0.8rem;
+}
+/* --------- Agent/Listing Grid ------------ */
+
+/* --------- Status Component ------------ */
+
+.status-container {
+    width: fit-content;
+    border-radius: 0.6rem;
+    align-items: center;
+    padding: 0.4rem 1rem;
+}
+
+.status-container.pending {
+    color: #92400E;
+    background-color: #FEF3C7;
+}
+
+.status-container.approved {
+    color: #065F46;
+    background-color: #D1FAE5;
+}
+
+.status-container.cancelled {
+    color: #9F1239;
+    background-color: #FFE4E6;
+}
+/* --------- Status Component------------ */
+
+/* --------- Admin Reviews------------ */
+#admin-reviews-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 2rem;
+}
+
+.admin-reviews {
+    gap: 1rem;
+    margin: 2rem 0;
+
+     border: 0.5px solid #615f5f8a;
+    box-shadow:
+        0 0.5rem 2rem rgba(31, 38, 135, 0.12),
+        inset 0 0.0625rem 0 rgba(255, 255, 255, 0.6);
+        padding: 1rem 2rem;
+        border-radius: 1rem;
+}
+
+.card-section-breaker {
+    width: auto;
+    margin: 1.4rem 0;
+    border-top: 1px solid #a8a6a66b;
+}
+/* --------- Admin Reviews------------ */
