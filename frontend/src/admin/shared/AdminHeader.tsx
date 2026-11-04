@@ -1,5 +1,5 @@
 import { BellDot, CircleUser, MessageCircleText, type LucideIcon } from 'lucide-react';
-import '../styles.css'
+import '../sharedStyles.css'
 
 interface headerIcon {
     label: string,

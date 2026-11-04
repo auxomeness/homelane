@@ -1,5 +1,5 @@
-import Status, { type StatusType } from '../shared/Status';
-import './styles.css'
+import Status, { type StatusType } from '../../shared/Status';
+import './dashboard.css'
 
 interface AgentGridProps {
     image: string;

@@ -1,12 +1,12 @@
 import { ListCheck, MoveRight, User } from 'lucide-react';
-import StatCard from '../components/StatCard';
+import StatCard from '../components/dashboard/StatCard';
 import AdminHeader from '../shared/AdminHeader'
 import AdminNavigation from '../shared/AdminNavigation';
 
-import '../styles.css'
+import './dashboardStyles.css'
 
-import AgentGrid from '../components/AgentGrid';
-import ListGrid from '../components/ListGrid';
+import AgentGrid from '../components/dashboard/AgentGrid';
+import ListGrid from '../components/dashboard/ListGrid';
 
 const Agents = [
     {

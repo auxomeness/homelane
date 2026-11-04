@@ -1,5 +1,5 @@
 import { MoveRight, type LucideIcon } from "lucide-react";
-import "./styles.css"
+import "./dashboard.css"
 
 interface StatCardProps {
     label: string;

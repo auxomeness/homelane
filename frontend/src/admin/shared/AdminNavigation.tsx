@@ -1,4 +1,4 @@
-import '../styles.css';
+import '../sharedStyles.css';
 
 interface NavItem {
     label: string;

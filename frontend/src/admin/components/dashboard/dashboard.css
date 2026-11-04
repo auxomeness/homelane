@@ -22,6 +22,8 @@
     flex-direction: row;
     align-items: center;
     gap: 0.5rem;
+    opacity: 80%;
+    color: #1E1B4B;
 }
 
 .card-title h4 {
@@ -108,31 +110,6 @@
     font-size: 0.8rem;
 }
 /* --------- Agent/Listing Grid ------------ */
-
-/* --------- Status Component ------------ */
-
-.status-container {
-    width: fit-content;
-    border-radius: 0.6rem;
-    align-items: center;
-    padding: 0.4rem 1rem;
-}
-
-.status-container.pending {
-    color: #92400E;
-    background-color: #FEF3C7;
-}
-
-.status-container.approved {
-    color: #065F46;
-    background-color: #D1FAE5;
-}
-
-.status-container.cancelled {
-    color: #9F1239;
-    background-color: #FFE4E6;
-}
-/* --------- Status Component------------ */
 
 /* --------- Admin Reviews------------ */
 #admin-reviews-container {
