@@ -1,4 +1,4 @@
-import type { Property } from '../data/discoveryData.js';
+import { formatMillions, type Property } from '../data/discoveryData.js';
 
 interface MapPlaceholderProps {
   properties: Property[];
@@ -6,12 +6,19 @@ interface MapPlaceholderProps {
   onSelect: (id: string) => void;
 }
 
-// Visual map placeholder (no live map). Each marker is one property and uses a
-// rounded, approximate position, drawn as an area ring instead of an exact pin.
+// Visual map (no live map). Roads and parks are drawn, and each price pin is one property.
+// Positions are rounded on purpose, so a pin marks an area and never an exact address.
 export default function MapPlaceholder({ properties, selectedId, onSelect }: MapPlaceholderProps) {
   return (
     <div className="map-placeholder" role="group" aria-label="Map of Naga City with approximate property areas">
-      <span className="map-placeholder__label">MAP · Naga City</span>
+      <svg className="map-placeholder__art" viewBox="0 0 356 240" preserveAspectRatio="none" aria-hidden="true">
+        <rect x="13" y="16" width="90" height="56" rx="8" fill="#d9ecde" />
+        <rect x="233" y="161" width="100" height="62" rx="8" fill="#d9ecde" />
+        <path d="M0 126 L356 66" stroke="#fff" strokeWidth="10" fill="none" />
+        <path d="M113 0 L173 240" stroke="#fff" strokeWidth="8" fill="none" />
+        <path d="M0 196 L356 176" stroke="#fff" strokeWidth="6" fill="none" />
+      </svg>
+      <span className="map-placeholder__label">Naga City</span>
       {properties.map((property) => (
         <button
           key={property.id}
@@ -22,11 +29,9 @@ export default function MapPlaceholder({ properties, selectedId, onSelect }: Map
           aria-pressed={selectedId === property.id}
           onClick={() => onSelect(property.id)}
         >
-          <span className="map-pin__ring" aria-hidden="true" />
-          <span className="map-pin__price">₱{property.price / 1000000}M</span>
+          {formatMillions(property.price)}
         </button>
       ))}
-      <span className="map-placeholder__note">Approximate areas only. Exact addresses are hidden.</span>
     </div>
   );
 }

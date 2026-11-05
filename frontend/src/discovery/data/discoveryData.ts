@@ -64,6 +64,8 @@ export interface Conversation {
   agentName: string;
   propertyId: string;
   unread: number;
+  /** Short time shown in the inbox row, such as "2m ago". */
+  lastTime: string;
   messages: ChatMessage[];
 }
 
@@ -72,32 +74,40 @@ export const currentUser = { id: 'buyer-1', name: 'Miguel Reyes' };
 
 export const conversations: Conversation[] = [
   {
-    id: 'c1', participantIds: ['buyer-1', 'agent-1'], buyerName: 'Miguel Reyes', agentName: 'Xian Humping', propertyId: 'p1', unread: 2,
+    id: 'c1', participantIds: ['buyer-1', 'agent-1'], buyerName: 'Miguel Reyes', agentName: 'Real estate agent KA', propertyId: 'p1', unread: 2, lastTime: '2m ago',
     messages: [
       { id: 'm1', senderId: 'buyer-1', text: 'Hi! Is the three-bedroom home still available?', time: 'Oct 28, 9:12 AM' },
       { id: 'm2', senderId: 'agent-1', text: 'Yes, it is. Would you like to schedule a viewing?', time: 'Oct 28, 9:40 AM' },
       { id: 'm3', senderId: 'buyer-1', time: 'Oct 29, 2:05 PM', offer: { kind: 'offer', amount: 8000000, status: 'Countered', note: 'Interested at this price.' } },
       { id: 'm4', senderId: 'agent-1', time: 'Oct 30, 10:15 AM', offer: { kind: 'counteroffer', amount: 8300000, status: 'Pending', note: 'The owner can meet at this price.' } },
-      { id: 'm5', senderId: 'agent-1', text: 'Let me know what you think of the counteroffer.', time: 'Oct 30, 10:16 AM' },
+      { id: 'm5', senderId: 'agent-1', text: 'Hello, I’m interested. When can I view?', time: 'Oct 30, 10:16 AM' },
     ],
   },
   {
-    id: 'c2', participantIds: ['buyer-1', 'agent-2'], buyerName: 'Miguel Reyes', agentName: 'Neil Villanueva', propertyId: 'p2', unread: 0,
+    id: 'c2', participantIds: ['buyer-1', 'agent-2'], buyerName: 'Miguel Reyes', agentName: 'Real estate agent JJ', propertyId: 'p4', unread: 0, lastTime: '1h ago',
     messages: [
-      { id: 'm1', senderId: 'buyer-1', text: 'Can I bring my family to see the townhouse?', time: 'Oct 25, 4:30 PM' },
-      { id: 'm2', senderId: 'agent-2', text: 'Of course. Saturday morning works well.', time: 'Oct 25, 5:02 PM' },
+      { id: 'm1', senderId: 'buyer-1', text: 'Can I bring my family to see the home?', time: 'Oct 25, 4:30 PM' },
+      { id: 'm2', senderId: 'agent-2', text: 'Thanks! The offer is with the owner.', time: 'Oct 25, 5:02 PM' },
     ],
   },
   {
-    id: 'c3', participantIds: ['buyer-1', 'agent-3'], buyerName: 'Miguel Reyes', agentName: 'Syxied Abelado', propertyId: 'p3', unread: 0,
+    id: 'c3', participantIds: ['buyer-1', 'agent-3'], buyerName: 'Miguel Reyes', agentName: 'Real estate agent BF', propertyId: 'p6', unread: 0, lastTime: 'Yesterday',
     messages: [
-      { id: 'm1', senderId: 'buyer-1', time: 'Oct 20, 11:00 AM', offer: { kind: 'offer', amount: 2200000, status: 'Declined' } },
+      { id: 'm1', senderId: 'buyer-1', time: 'Oct 20, 11:00 AM', offer: { kind: 'offer', amount: 3300000, status: 'Declined' } },
       { id: 'm2', senderId: 'agent-3', text: 'Sorry, the owner declined this offer.', time: 'Oct 20, 3:20 PM' },
+      { id: 'm3', senderId: 'buyer-1', text: 'Is parking included?', time: 'Oct 21, 9:00 AM' },
+    ],
+  },
+  {
+    id: 'c5', participantIds: ['buyer-1', 'agent-4'], buyerName: 'Miguel Reyes', agentName: 'Real estate agent XH', propertyId: 'p5', unread: 1, lastTime: 'Mon',
+    messages: [
+      { id: 'm1', senderId: 'buyer-1', text: 'Is the duplex open for viewing this week?', time: 'Oct 27, 8:00 AM' },
+      { id: 'm2', senderId: 'agent-4', text: 'Viewing is set for Saturday, 10:00 AM.', time: 'Oct 27, 9:10 AM' },
     ],
   },
   // Not shared with the current user, so it is filtered out of the list.
   {
-    id: 'c4', participantIds: ['buyer-2', 'agent-1'], buyerName: 'Another Buyer', agentName: 'Xian Humping', propertyId: 'p4', unread: 1,
+    id: 'c4', participantIds: ['buyer-2', 'agent-1'], buyerName: 'Another Buyer', agentName: 'Real estate agent KA', propertyId: 'p4', unread: 1, lastTime: 'Oct 27',
     messages: [{ id: 'm1', senderId: 'buyer-2', text: 'Private conversation.', time: 'Oct 27, 8:00 AM' }],
   },
 ];
@@ -115,22 +125,60 @@ export interface NotificationItem {
   read: boolean;
   /** Related reference shown on the item. */
   reference: string;
-  /** Page the notification links to, where supported. */
-  link?: 'messages' | 'map';
+  /** Page the notification links to. */
+  link?: 'messages' | 'map' | 'viewings';
 }
 
 export const notifications: NotificationItem[] = [
-  { id: 'n1', category: 'Messages', title: 'New message', description: 'Xian Humping sent you a message about the three-bedroom home.', time: '10 min ago', read: false, reference: 'Three-bedroom home · Concepcion Pequeña', link: 'messages' },
-  { id: 'n2', category: 'Offers', title: 'Counteroffer received', description: 'A counteroffer of PHP 8,300,000 is waiting for your response. Offers are non-binding.', time: '1 hr ago', read: false, reference: 'Conversation with Xian Humping', link: 'messages' },
-  { id: 'n3', category: 'Offers', title: 'Offer update', description: 'Your offer of PHP 2,200,000 was declined.', time: 'Oct 20', read: true, reference: 'Studio condo unit · Sabang', link: 'messages' },
-  { id: 'n4', category: 'Viewings', title: 'Viewing response', description: 'The agent responded to your viewing request. Check the viewing status.', time: 'Yesterday', read: false, reference: 'Modern townhouse · Triangulo' },
-  { id: 'n5', category: 'Listings', title: 'Listing updated', description: 'The price of this saved listing was updated.', time: 'Oct 26', read: true, reference: 'Garden-view family home · Pacol', link: 'map' },
+  { id: 'n1', category: 'Messages', title: 'New message', description: 'Xian Humping replied to your inquiry about the Three-bedroom home in Naga City.', time: '2m ago', read: false, reference: 'Three-bedroom home · Concepcion Pequeña', link: 'messages' },
+  { id: 'n2', category: 'Offers', title: 'Offer update', description: 'Your offer of ₱ 8,500,000 has been countered. Offers are non-binding.', time: '1h ago', read: true, reference: 'Conversation with Xian Humping', link: 'messages' },
+  { id: 'n3', category: 'Viewings', title: 'Viewing scheduled', description: 'Your viewing for Three-bedroom home is confirmed by the agent.', time: '3h ago', read: false, reference: 'Three-bedroom home · Naga City', link: 'viewings' },
+  { id: 'n4', category: 'Listings', title: 'Listing update', description: 'A new listing matching your saved search is available in Naga City.', time: 'Yesterday', read: true, reference: 'Garden-view family home · Pacol', link: 'map' },
 ];
 
 export const notificationCategories: Array<'All' | NotificationCategory> = ['All', 'Messages', 'Offers', 'Viewings', 'Listings'];
 
+/** Offer summaries shown when the Offers category is selected. Offers are non-binding. */
+export interface OfferSummary {
+  id: string;
+  propertyId: string;
+  agentInitials: string;
+  proposed: number;
+  time: string;
+  status: OfferStatus;
+}
+
+export const offerSummaries: OfferSummary[] = [
+  { id: 'o1', propertyId: 'p4', agentInitials: 'KA', proposed: 11500000, time: '3h ago', status: 'Accepted' },
+  { id: 'o2', propertyId: 'p3', agentInitials: 'JJ', proposed: 2200000, time: '2d ago', status: 'Declined' },
+  { id: 'o3', propertyId: 'p5', agentInitials: 'BF', proposed: 6500000, time: '7h ago', status: 'Countered' },
+  { id: 'o4', propertyId: 'p2', agentInitials: 'XH', proposed: 4900000, time: '33m ago', status: 'Pending' },
+];
+
+/* ---------- Viewings ---------- */
+
+/** A viewing request stays "Not confirmed" until the agent responds. */
+export type ViewingStatus = 'Not confirmed' | 'Confirmed';
+
+export interface ViewingRequest {
+  id: string;
+  propertyId: string;
+  status: ViewingStatus;
+  /** Small heading shown on the left of the card. */
+  heading: string;
+  requested: string;
+  note?: string;
+}
+
+export const viewingRequests: ViewingRequest[] = [
+  { id: 'v1', propertyId: 'p1', status: 'Not confirmed', heading: 'Awaiting agent response', requested: 'Oct 31, 2026 · 10:00 AM' },
+  { id: 'v2', propertyId: 'p2', status: 'Confirmed', heading: 'Accepted Request', requested: 'Nov 1, 2026 · 2:30 PM', note: 'I’d like to see the parking space.' },
+];
+
 /* ---------- Helpers ---------- */
 
 export const formatPrice = (value: number) => `PHP ${value.toLocaleString('en-PH')}`;
+export const formatMillions = (value: number) => `₱${Number((value / 1000000).toFixed(1))}M`;
+export const formatPeso = (value: number) => `₱ ${value.toLocaleString('en-PH')}`;
 
 export const getProperty = (id: string) => properties.find((p) => p.id === id);
