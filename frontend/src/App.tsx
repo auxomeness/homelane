@@ -1,12 +1,11 @@
-import AdminDashboard from './admin/pages/AdminDashboard.js';
-// import AgentApp from './agent/AgentApp.js';
+import AdminDashboard from './admin/pages/dashboard/AdminDashboard.js';
+
 
 export default function App() {
   return (
-    // lagay auth role/endpoint agadz here if okay na lahat na pages
+    // lagay auth role/endpoint agadz if okay na lahat na pages
     <>
-     {/* <AgentApp /> */}
-    <AdminDashboard/> 
+    <h1>HELLOOOOO</h1> 
     </>
   );
 }
