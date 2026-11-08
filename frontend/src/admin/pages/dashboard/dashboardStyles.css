@@ -5,11 +5,11 @@
     padding: 1rem 2rem;
 }
 
-.dashboard-title {
+.dashboard-header {
     margin: 2rem 0;
 }
 
-.dashboard-title p {
+.dashboard-header p {
     opacity: 50%;
     letter-spacing: 0.09rem;
 }

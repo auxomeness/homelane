@@ -1,5 +1,6 @@
 import { BellDot, CircleUser, MessageCircleText, type LucideIcon } from 'lucide-react';
-import '../sharedStyles.css'
+import './sharedStyles.css'
+import { Link } from 'react-router';
 
 interface headerIcon {
     label: string,
@@ -37,13 +38,12 @@ export default function AdminHeader() {
                                 const HeaderNavIcons = icons.icon;
 
                                 return (
-                                    <a
+                                    <Link to={`/icons`}
                                         className="header-icons"
                                         key={icons.label}
-                                        // href={icons.href}
                                     >
                                         <HeaderNavIcons size={24}/>
-                                    </a>
+                                    </Link>
                                 );
                             })}
                 </div>

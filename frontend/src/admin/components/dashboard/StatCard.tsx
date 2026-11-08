@@ -1,5 +1,6 @@
 import { MoveRight, type LucideIcon } from "lucide-react";
 import "./dashboard.css"
+import { Link } from "react-router";
 
 interface StatCardProps {
     label: string;
@@ -24,10 +25,10 @@ export default function StatCard({
             <div className="card-bottom">
                 <div className="card-total">{value}</div>
 
-                <a href={href} className="card-link">
+                <Link to={`/admin/${href}`} className="card-link" viewTransition>
                     <span>View reviews</span>
                     <MoveRight size={15}/>
-                </a>    
+                </Link>    
             </div>
         </div>
     );

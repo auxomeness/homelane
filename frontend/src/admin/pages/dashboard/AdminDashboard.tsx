@@ -1,12 +1,13 @@
 import { ListCheck, MoveRight, User } from 'lucide-react';
-import StatCard from '../components/dashboard/StatCard';
-import AdminHeader from '../shared/AdminHeader'
-import AdminNavigation from '../shared/AdminNavigation';
+import StatCard from '../../components/dashboard/StatCard';
+import AdminHeader from '../../shared/AdminHeader'
+import AdminNavigation from '../../shared/AdminNavigation';
 
 import './dashboardStyles.css'
 
-import AgentGrid from '../components/dashboard/AgentGrid';
-import ListGrid from '../components/dashboard/ListGrid';
+import AgentGrid from '../../components/dashboard/AgentGrid';
+import ListGrid from '../../components/dashboard/ListGrid';
+import { Link, Outlet } from 'react-router';
 
 const Agents = [
     {
@@ -38,14 +39,14 @@ export default function AdminDashboard() {
             <AdminHeader/>
             <AdminNavigation/>
 
-            <div className="dashboard-title">
+            <div className="dashboard-header">
             <h1>Dashboard</h1>
             <p>An overview of agent applications and property listing reviews.</p>
             </div>
 
             <div className="admin-stat">
-            <StatCard label={'Agent Reviews'} value={0} href={''} icon={User}/>
-            <StatCard label={'Listing Reviews'} value={12} href={''} icon={ListCheck}/>
+            <StatCard label={'Agent Reviews'} value={0} href={'agent-reviews'} icon={User}/>
+            <StatCard label={'Listing Reviews'} value={12} href={'listing-reviews'} icon={ListCheck}/>
             </div>
 
             <article id='admin-reviews-container'>
@@ -61,10 +62,10 @@ export default function AdminDashboard() {
 
                     <div className="card-section-breaker"></div>
 
-                    <a href="/agent-reviews" className="card-link">
+                    <Link to="/admin/agent-reviews" className="card-link" viewTransition>
                     <p>View all agent reviews</p>
                     <MoveRight size={15}/>
-                    </a> 
+                    </Link> 
                 </section>
 
                 <section className='admin-reviews'>
@@ -79,12 +80,14 @@ export default function AdminDashboard() {
 
                     <div className="card-section-breaker"></div>
 
-                    <a href="/listing-reviews" className="card-link">
+                    <Link to="/admin/listing-reviews" className="card-link" viewTransition>
                     <p>View all listing reviews</p>
                     <MoveRight size={15}/>
-                    </a> 
+                    </Link> 
                 </section>
             </article>
+
+            <Outlet/>
         </div>
     );
 }

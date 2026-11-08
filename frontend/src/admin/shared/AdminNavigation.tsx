@@ -1,4 +1,6 @@
-import '../sharedStyles.css';
+
+import { Link } from 'react-router';
+import './sharedStyles.css';
 
 interface NavItem {
     label: string;
@@ -6,7 +8,7 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-    { label: 'Overview', path: '/' },
+    { label: 'Overview', path: '' },
     { label: 'Listing reviews', path: 'listing-reviews' },
     { label: 'Agent reviews', path: 'agent-reviews' },
     { label: 'Viewings', path: 'viewings' }
@@ -15,19 +17,24 @@ const navItems: NavItem[] = [
 export default function AdminNavigation() {
     return(
         <>
-        <section id='admin-nav'>
+        <nav id='admin-nav'>
             <div className="nav-title">
                 <h3>Workspace</h3>
             </div>
 
+ {/* ----------------------- Add links to navbar -------------------------------  */}
             <div className="nav-panel">
                 {navItems.map((nav) => (
-                    <p key={nav.label} className='nav'>
-                        {nav.label}
-                    </p>
+                    
+                        <Link to={`/admin/${nav.path}`}>
+                            <p key={nav.label} className='nav'>
+                                {nav.label}
+                            </p>
+                        </Link>
+// ----------------------- Add links to navbar ---------------------------------
                 ))}
             </div>
-        </section>
+        </nav>
         </>
     );
 }
