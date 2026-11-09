@@ -26,8 +26,8 @@ export default function AdminNavigation() {
             <div className="nav-panel">
                 {navItems.map((nav) => (
                     
-                        <Link to={`/admin/${nav.path}`}>
-                            <p key={nav.label} className='nav'>
+                        <Link to={`/admin/${nav.path}`} key={nav.label}>
+                            <p className='nav'>
                                 {nav.label}
                             </p>
                         </Link>

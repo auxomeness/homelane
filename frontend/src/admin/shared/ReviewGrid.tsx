@@ -1,6 +1,19 @@
-import type { list } from "../libs/listData";
+import { Link } from "react-router";
 
-import "./reviewGrid.css"
+import "./sharedStyles.css"
+
+import Status, { type StatusType } from "./Status";
+import { MoveRight } from "lucide-react";
+
+interface ReviewGridProps {
+    image: string,
+    title: string;
+    location: string;
+    intPrice: number;
+    status: StatusType
+    link:string;
+}
+
 
 export default function ReviewGrid({ 
     image,
@@ -8,8 +21,15 @@ export default function ReviewGrid({
     location,
     intPrice,
     status,
-    action
- }: list) {
+    link
+}: ReviewGridProps) {
+    
+    // format for pricing
+    const formattedNumber = Intl.NumberFormat("en-US", { 
+        maximumFractionDigits: 2,
+         }
+    ).format(intPrice)
+
     return(
         <div className="review-container">
             <div className="review-name">
@@ -25,16 +45,22 @@ export default function ReviewGrid({
                     </div>
                     
                     <div className="review-price">
-                        {intPrice}
-                    </div>
-                    
-                    <div className="review-status">
-                        {status}
+                        <span> &#8369; {formattedNumber}</span>
                     </div>
 
-                    <div className="review-action">
-                        {action && JSON.stringify(action)}
+                    <div className="review-status">
+                        <Status status={status}/>
                     </div>
+
+                <Link to={`/admin/${link}`} key={link} viewTransition>
+                    <div className="review-action">
+                        <span key={link}>View Details</span>
+                        
+                        <div>
+                        <MoveRight size={15}/>
+                        </div>
+                    </div>
+                </Link>
             </div>
         </div>
     );
