@@ -1,5 +1,5 @@
 import { MoveRight, type LucideIcon } from "lucide-react";
-import "./dashboard.css"
+import "./dashboardComponentStyles.css"
 import { Link } from "react-router";
 
 interface StatCardProps {

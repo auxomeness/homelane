@@ -1,5 +1,5 @@
 import Status, { type StatusType } from '../../shared/Status';
-import './dashboard.css'
+import './dashboardComponentStyles.css'
 
 interface ListGridProps {
     image: string;

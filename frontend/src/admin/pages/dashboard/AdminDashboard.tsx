@@ -3,35 +3,14 @@ import StatCard from '../../components/dashboard/StatCard';
 import AdminHeader from '../../shared/AdminHeader'
 import AdminNavigation from '../../shared/AdminNavigation';
 
-import './dashboardStyles.css'
+import './dashboardPageStyles.css'
 
 import AgentGrid from '../../components/dashboard/AgentGrid';
 import ListGrid from '../../components/dashboard/ListGrid';
+import { Agents, Lists } from '../../libs/listData';
+
 import { Link, Outlet } from 'react-router';
 
-const Agents = [
-    {
-        image:'', name: "Xian Humping de los reyes", title: "PRC#0029182", location: "Naga City, PH", status: "pending"
-    },
-    {
-        image:'', name: "Neil Anlene Villanueva", title: "PRC#0029183", location: "San Fernando City, PH", status: "approved"
-    },
-    {
-        image:'', name: "Syxied Sebven Abelado", title: "PRC#0029182", location: "Naga City, PH", status: "cancelled"
-    },
-] as const
-
-const Lists = [
-    {
-        image:'', name: "Ateneo de Naga University", title: "PRC#0029182", location: "Naga City, PH", status: "pending"
-    },
-    {
-        image:'', name: "BGC Courtside", title: "PRC#0029183", location: "San Fernando City, PH", status: "approved"
-    },
-    {
-        image:'', name: "Molave Town Street", title: "PRC#0029182", location: "Naga City, PH", status: "cancelled"
-    },
-] as const
 
 export default function AdminDashboard() {
     return(
