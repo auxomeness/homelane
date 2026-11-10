@@ -1,15 +1,16 @@
-interface AgentHeaderProps { showRole?: boolean; }
+import { BellDot, CircleUser, MessageCircleText } from 'lucide-react';
 
-export default function AgentHeader({ showRole = false }: AgentHeaderProps) {
+export default function AgentHeader() {
   return (
-    <header className={`agent-header${showRole ? ' agent-header--role' : ''}`}>
-      <img className="agent-header__brand" src="/assets/figma/brand-mark-header.svg" alt="" />
-      <span className="agent-header__wordmark">HOMELANE</span>
-      {showRole && <span className="agent-header__role">Agents</span>}
-      <div className="agent-header__actions" aria-label="Account shortcuts">
-        <button type="button" aria-label="Notifications"><img src="/assets/figma/notifications.svg" alt="" /></button>
-        {!showRole && <button type="button" aria-label="Messages"><img src="/assets/figma/messages.svg" alt="" /></button>}
-        <button type="button" aria-label="Profile"><img src="/assets/figma/profile.svg" alt="" /></button>
+    <header className="agent-header">
+      <h2 className="agent-header__brand">HOMELANE</h2>
+      <div className="agent-header__right">
+        <span className="agent-header__role">Agent</span>
+        <div className="agent-header__actions" aria-label="Account shortcuts">
+          <button type="button" aria-label="Notifications"><BellDot size={23} /></button>
+          <button type="button" aria-label="Messages"><MessageCircleText size={23} /></button>
+          <button type="button" aria-label="Profile"><CircleUser size={23} /></button>
+        </div>
       </div>
     </header>
   );

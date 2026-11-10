@@ -1,70 +1,85 @@
+import { ArrowRight, CircleAlert, Clock3, House, Layers3 } from 'lucide-react';
 import Button from '../../../components/button.js';
-import AgentHeader from '../../shared/AgentHeader.js';
+import AgentMetricCard from '../../components/dashboard/AgentMetricCard.js';
+import AgentListingCard from '../../components/listings/AgentListingCard.js';
+import { agentListings } from '../../libs/listData.js';
 import type { AgentScreen } from '../../shared/AgentNavigation.js';
 import './dashboardStyles.css';
 
 interface AgentDashboardProps { onNavigate: (screen: AgentScreen) => void; }
 
-const statusItems = [
-  { value: '4', label: '₱ 19.2M', tone: 'active' },
-  { value: '2', label: 'Pending', tone: 'pending' },
-  { value: '1', label: '1 to Fix', tone: 'rejected' },
-  { value: '0', label: 'Drafts', tone: 'inactive' },
+const metrics = [
+  { label: 'Managed properties', value: '7', detail: 'Across your portfolio', icon: Layers3 },
+  { label: 'Active listings', value: '4', detail: '₱ 19.2M total value', icon: House },
+  { label: 'Pending review', value: '2', detail: 'Awaiting admin review', icon: Clock3 },
+  { label: 'Needs attention', value: '1', detail: 'Update and resubmit', icon: CircleAlert },
 ];
 
 export default function AgentDashboard({ onNavigate }: AgentDashboardProps) {
   return (
-    <>
-      <AgentHeader showRole />
-      <main className="agent-dashboard">
-        <section className="agent-profile-card" aria-label="Agent profile summary">
-          <span className="agent-profile-card__avatar-wrap">
-            <img className="agent-profile-card__avatar" src="/assets/figma/avatar.svg" alt="" />
-            <span>SC</span>
-          </span>
-          <div className="agent-profile-card__identity">
-            <strong>Shan Cruz, REB</strong>
-            <span>PRC #0029182 | Naga City, PH</span>
-          </div>
-          <span className="agent-verified">VERIFIED</span>
-        </section>
+    <main className="agent-dashboard">
+      <div className="agent-page-heading">
+        <div>
+          <h1>Dashboard</h1>
+          <p>An overview of your property listings and buyer inquiries.</p>
+        </div>
+        <Button className="agent-button agent-button--primary" size="medium" onClick={() => onNavigate('addListing')}>
+          + Add listing
+        </Button>
+      </div>
 
-        <section className="agent-status-overview">
-          <p className="agent-section-label">LISTING STATUS OVERVIEW</p>
-          <h1>7 Total Managed Properties</h1>
-          <div className="agent-status-overview__grid">
-            {statusItems.map((item) => (
-              <div className={`agent-status-cell is-${item.tone}`} key={item.label}>
-                <strong>{item.value}</strong><span>{item.label}</span>
-              </div>
+      <section className="agent-profile-card" aria-label="Agent profile summary">
+        <img src="/assets/figma/avatar.svg" alt="" />
+        <div className="agent-profile-card__identity">
+          <h2>Shan Cruz, REB</h2>
+          <p>PRC #0029182 <span>·</span> Naga City, PH</p>
+        </div>
+        <span className="agent-profile-card__verified">Verified agent</span>
+      </section>
+
+      <section className="agent-metrics" aria-label="Listing metrics">
+        {metrics.map((metric) => <AgentMetricCard key={metric.label} {...metric} />)}
+      </section>
+
+      <div className="agent-dashboard-grid">
+        <section className="agent-panel agent-dashboard-listings">
+          <div className="agent-panel__heading">
+            <div>
+              <h2>Listing activity</h2>
+              <p>Recent updates across your properties</p>
+            </div>
+            <button type="button" className="agent-text-action" onClick={() => onNavigate('listings')}>
+              View all <ArrowRight size={16} />
+            </button>
+          </div>
+          <div className="agent-dashboard-listings__items">
+            {agentListings.map((listing) => (
+              <AgentListingCard key={listing.id} listing={listing} onAction={() => onNavigate('listings')} />
             ))}
           </div>
         </section>
 
-        <div className="agent-dashboard__shortcuts">
-          <Button className="agent-button agent-button--primary" size="small" shape="pill" onClick={() => onNavigate('addListing')}>+ Add Listing</Button>
-          <Button className="agent-button agent-button--secondary" variant="secondary" size="small" shape="pill" onClick={() => onNavigate('listings')}>My Listings (7) &gt;</Button>
-        </div>
-
-        <section className="agent-action-card">
-          <h2>ACTION REQUIRED</h2>
-          <p>Residential Lot in Pacol • ₱ 2.95M</p>
-          <Button className="agent-button agent-button--danger" size="small" shape="pill" fullWidth onClick={() => onNavigate('listings')}>Fix and Resubmit Form</Button>
-        </section>
-
-        <section className="agent-inquiries">
-          <div className="agent-inquiries__heading">
-            <h2>RECENT BUYER INQUIRIES</h2>
-            <button type="button" onClick={() => onNavigate('listings')}>View All</button>
+        <section className="agent-panel agent-inquiries">
+          <div className="agent-panel__heading">
+            <div>
+              <h2>Recent buyer inquiries</h2>
+              <p>Follow up with interested buyers</p>
+            </div>
+            <button type="button" className="agent-text-action" onClick={() => onNavigate('listings')}>
+              View all <ArrowRight size={16} />
+            </button>
           </div>
           <article className="agent-inquiry">
-            <strong>Elena Alano | San Felipe</strong><span>“Is Saturday viewing available?”</span><b>NEW</b>
+            <div className="agent-inquiry__avatar">EA</div>
+            <div><h3>Elena Alano</h3><p>San Felipe · “Is Saturday viewing available?”</p></div>
+            <span className="agent-inquiry__new">New</span>
           </article>
           <article className="agent-inquiry">
-            <strong>Juan Dela Cruz | 3BR Villa</strong><span>“Is Saturday viewing available?”</span>
+            <div className="agent-inquiry__avatar">JD</div>
+            <div><h3>Juan Dela Cruz</h3><p>3BR Villa · “Can I see the floor plan?”</p></div>
           </article>
         </section>
-      </main>
-    </>
+      </div>
+    </main>
   );
 }

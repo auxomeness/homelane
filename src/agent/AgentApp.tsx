@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import AgentDashboard from './pages/dashboard/AgentDashboard.js';
 import AgentAddListing from './pages/add-listing/AgentAddListing.js';
 import AgentListings from './pages/listings/AgentListings.js';
+import AgentHeader from './shared/AgentHeader.js';
 import AgentNavigation, { type AgentScreen } from './shared/AgentNavigation.js';
 import './shared/sharedStyles.css';
 
@@ -34,10 +35,11 @@ export default function AgentApp() {
 
   return (
     <div className="agent-app">
+      <AgentHeader />
+      <AgentNavigation screen={screen} onNavigate={navigate} />
       {screen === 'dashboard' && <AgentDashboard onNavigate={navigate} />}
       {screen === 'listings' && <AgentListings onNavigate={navigate} />}
       {screen === 'addListing' && <AgentAddListing onNavigate={navigate} />}
-      <AgentNavigation screen={screen} onNavigate={navigate} />
     </div>
   );
 }

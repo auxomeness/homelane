@@ -1,34 +1,18 @@
-.agent-listings { height: 844px; overflow-y: auto; padding: 107px 0 140px; scrollbar-width: none; }
-.agent-listings::-webkit-scrollbar { display: none; }
-.agent-listings > h1 { margin: 0 24px; color: var(--agent-ink); font-size: 12px; line-height: 18px; }
-.agent-listing-filters { display: flex; justify-content: flex-start; gap: 18px; margin: 13px 0 10px 40px; white-space: nowrap; }
-.agent-listing-filters button { height: 22px; padding: 0 10px; border: 0; border-radius: 16px; background: #f1f5f9; color: var(--agent-ink); font-size: 7px; line-height: 12px; }
-.agent-listing-filters button.is-selected { background: var(--agent-primary); color: #fff; }
-.agent-listing-card { position: relative; width: calc(100% - 38px); margin: 0 auto 27px; padding: 9px 18px; overflow: hidden; border-radius: 20px; background: #fff; box-shadow: var(--agent-shadow); }
-.agent-listing-card--active { height: 132px; margin-bottom: 26px; border-left: 5px solid #84d776; }
-.agent-listing-card--pending { height: 135px; border-left: 5px solid #fb9e4c; }
-.agent-listing-card--rejected { height: 212px; margin-bottom: 0; border-left: 5px solid #ff4e5a; }
-.agent-listing-card__topline { display: flex; align-items: center; justify-content: space-between; }
-.agent-status-pill { display: inline-flex; align-items: center; height: 20px; padding: 0 10px; border-radius: 16px; font-size: 8px; line-height: 12px; }
-.agent-status-pill--active { background: #d7f6e9; color: #08764f; }
-.agent-status-pill--pending { background: #fef3c7; color: #92400e; }
-.agent-status-pill--rejected { background: #ffe3e8; color: #e43448; }
-.agent-listing-card__map-label { color: #333; font-size: 7px; line-height: 12px; font-style: italic; }
-.agent-listing-card h2 { margin: 10px 0 0 11px; color: #000; font-family: 'Patua One', serif; font-size: 11px; line-height: 15px; font-weight: 400; }
-.agent-listing-card__price { margin: 0 0 0 11px; color: #000; font-family: 'Patua One', serif; font-size: 11px; line-height: 15px; }
-.agent-listing-card__actions { display: flex; gap: 9px; margin: 16px 12px 0 11px; }
-.agent-listing-card__actions .btn { width: 50%; height: 28px; }
-.agent-listing-card--pending h2 { margin-top: 8px; }
-.agent-listing-card__caption { margin: 0 11px; color: var(--agent-ink); font-size: 8px; line-height: 12px; font-weight: 700; }
-.agent-listing-card__wide-action.btn { display: flex; width: calc(100% - 39px); height: 28px; margin: 9px auto 0; }
-.agent-listing-card__required { color: #f64e51; font-size: 10px; line-height: 14px; }
-.agent-listing-card--rejected h2 { margin-top: 17px; }
-.agent-feedback { height: 64px; margin: 12px 0 0 4px; padding: 6px 12px; border: 1px solid #ff4e5a; border-radius: 15px; background: rgba(250,225,225,.35); color: #f64e51; }
-.agent-feedback strong { font-size: 8px; line-height: 12px; }
-.agent-feedback p { margin: 3px 0 0 12px; color: #333; font-size: 8px; line-height: 12px; }
-.agent-listing-card--rejected .btn { width: calc(100% - 29px); height: 22px; min-height: 22px; margin: 15px 0 0 14px; border: 0; }
+.agent-listings { max-width: 1440px; margin: 0 auto; }
+.agent-listings .agent-page-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin: 2rem 0 1.5rem; }
+.agent-listings .agent-page-heading h1 { margin: 0 0 .35rem; color: var(--agent-ink); font-size: clamp(1.75rem, 3vw, 2.25rem); }
+.agent-listings .agent-page-heading p { margin: 0; color: var(--agent-muted); letter-spacing: .04em; }
+.agent-listings-panel { padding: 1.5rem; }
+.agent-listings-panel__top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-bottom: 1rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(30,27,75,.12); }
+.agent-listings-panel__top > p { margin: 0; color: var(--agent-muted); font-size: .84rem; white-space: nowrap; }
+.agent-listing-filters { display: flex; flex-wrap: wrap; gap: .5rem; }
+.agent-listing-filters button { padding: .55rem .9rem; border: 1px solid transparent; border-radius: 99px; background: transparent; color: var(--agent-muted); font-size: .85rem; font-weight: 600; cursor: pointer; }
+.agent-listing-filters button:hover { background: rgba(30,27,75,.06); color: var(--agent-ink); }
+.agent-listing-filters button.is-selected { border-color: rgba(30,27,75,.12); background: #1e1b4b; color: #fff; }
+.agent-listings-list { display: grid; gap: .8rem; }
 
-@media (max-width: 389px) {
-  .agent-listing-filters { gap: 8px; margin-right: 18px; margin-left: 24px; }
-  .agent-listing-filters button { padding: 0 8px; }
+@media (max-width: 700px) {
+  .agent-listings .agent-page-heading { align-items: flex-start; flex-direction: column; }
+  .agent-listings-panel { padding: 1rem; }
+  .agent-listings-panel__top { align-items: flex-start; flex-direction: column; }
 }

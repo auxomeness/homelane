@@ -3,6 +3,7 @@ import AdminDashboard from "./admin/pages/dashboard/AdminDashboard";
 import App from "./App";
 import AdminListingReview from "./admin/pages/listing-review/AdminListingReview";
 import AdminAgentReview from "./admin/pages/agent-review/AdminAgentReview";
+import AgentApp from "./agent/AgentApp";
 
 const AppRoutes = createBrowserRouter([
     // ------- Root page where the auth gate should be placed -------
@@ -45,8 +46,8 @@ const AppRoutes = createBrowserRouter([
     },
 
     {
-        path: "/agent",
-        element: <h3>Place main agent page component route in ./AppRoutes.tsx</h3>
+        path: "/agent/*",
+        Component: AgentApp
     }
 
 ]);
