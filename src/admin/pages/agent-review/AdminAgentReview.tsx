@@ -1,9 +1,14 @@
-import './agentReviewStyles.css'
+import AdminHeader from '../../shared/AdminHeader';
+import AdminNavigation from '../../shared/AdminNavigation';
+import './agentReviewPagesStyles.css'
 
 export default function AdminAgentReview() {
     return(
-        <>
-        <h1>Admin agent review page</h1>
-        </>
+        <div className="agent-container">
+            <AdminHeader/>
+            <AdminNavigation/>
+            <h1>Admin agent review page</h1>
+        </div>
+
     );
 }
