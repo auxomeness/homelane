@@ -3,7 +3,6 @@ import { Link } from "react-router";
 import "./sharedStyles.css"
 
 import Status, { type StatusType } from "./Status";
-import { MoveRight } from "lucide-react";
 
 interface ReviewGridProps {
     image: string,
@@ -31,15 +30,15 @@ export default function ReviewGrid({
     ).format(intPrice)
 
     return(
-        <div className="review-container">
-            <div className="review-name">
-                <div className="review-name-image">
-                {image}
+        <Link to={`/admin/${link}`} key={link} viewTransition>
+            <div className="review-container">
+                <div className="review-name">
+                    <div className="review-name-image">
+                    {image}
+                    </div>
+                    <h3>{title}</h3>
                 </div>
-                <h3>{title}</h3>
-            </div>
-                
-            <div className="review-details">    
+                 
                     <div className="review-location">
                         {location}
                     </div>
@@ -52,16 +51,7 @@ export default function ReviewGrid({
                         <Status status={status}/>
                     </div>
 
-                <Link to={`/admin/${link}`} key={link} viewTransition>
-                    <div className="review-action">
-                        <span key={link}>View Details</span>
-                        
-                        <div>
-                        <MoveRight size={15}/>
-                        </div>
-                    </div>
-                </Link>
             </div>
-        </div>
+        </Link>
     );
 }

@@ -1,4 +1,4 @@
-import './status.css'
+import './sharedStyles.css'
 
 export type StatusType =  "pending" | "approved" | "cancelled";
 
