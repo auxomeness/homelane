@@ -5,7 +5,7 @@ Frontend application for Homelane. The backend lives in the separate [homelane-b
 ## Stack
 
 - Frontend: React, TypeScript, Vite
-- Package management: npm workspaces for the frontend package
+- Package management: npm
 
 ## Requirements
 

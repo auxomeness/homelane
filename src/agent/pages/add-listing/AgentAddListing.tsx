@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import Button from '../../components/button.js';
-import type { AgentScreen } from '../shared/AgentNavigation.js';
+import Button from '../../../components/button.js';
+import type { AgentScreen } from '../../shared/AgentNavigation.js';
+import './addListingStyles.css';
 
 interface AgentAddListingProps { onNavigate: (screen: AgentScreen) => void; }
 const propertyTypes = ['House', 'Condo', 'Townhouse', 'Lot'];

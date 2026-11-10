@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import Button from '../../components/button.js';
-import AgentHeader from '../shared/AgentHeader.js';
-import type { AgentScreen } from '../shared/AgentNavigation.js';
+import Button from '../../../components/button.js';
+import AgentHeader from '../../shared/AgentHeader.js';
+import type { AgentScreen } from '../../shared/AgentNavigation.js';
+import './listingsStyles.css';
 
 interface AgentListingsProps { onNavigate: (screen: AgentScreen) => void; }
 type ListingStatus = 'Active' | 'Pending' | 'Rejected';

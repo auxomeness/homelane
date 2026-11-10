@@ -8,13 +8,26 @@
     "node": ">=24 <25",
     "npm": ">=12 <13"
   },
-  "workspaces": [
-    "frontend"
-  ],
   "scripts": {
-    "dev": "npm run dev --workspace frontend",
-    "build": "npm run build --workspace frontend",
-    "start": "npm run preview --workspace frontend",
-    "lint": "npm run lint --workspace frontend"
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "start": "vite preview",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@fontsource/patua-one": "^5.3.0",
+    "@fontsource/plus-jakarta-sans": "^5.3.0",
+    "lucide-react": "^1.67.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router": "^8.5.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.7",
+    "@vitejs/plugin-react": "^4.7.0",
+    "typescript": "~5.8.3",
+    "vite": "^6.3.5"
   }
 }

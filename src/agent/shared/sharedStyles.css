@@ -1,0 +1,64 @@
+@import '@fontsource/plus-jakarta-sans/400.css';
+@import '@fontsource/plus-jakarta-sans/500.css';
+@import '@fontsource/plus-jakarta-sans/600.css';
+@import '@fontsource/plus-jakarta-sans/700.css';
+@import '@fontsource/patua-one/400.css';
+
+.agent-app {
+  --agent-ink: #111238;
+  --agent-primary: #1e1b4b;
+  --agent-muted: #858589;
+  --agent-border: rgba(17, 18, 56, .2);
+  --agent-shadow: 0 12px 24px rgba(10, 13, 38, .14);
+  --agent-glass-fill: rgba(255, 255, 255, .62);
+  --agent-glass-edge: rgba(255, 255, 255, .82);
+  --agent-glass-shadow: 0 12px 28px rgba(17, 18, 56, .13), inset 0 1px 0 rgba(255, 255, 255, .85);
+  position: relative;
+  width: min(100%, 390px);
+  height: 844px;
+  min-height: 844px;
+  margin: 0 auto;
+  overflow: hidden;
+  background: #fff;
+  color: var(--agent-ink);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.agent-app button,
+.agent-app input,
+.agent-app textarea { font: inherit; }
+.agent-app button { color: inherit; }
+
+.agent-header { position: absolute; z-index: 2; top: 16px; left: 50%; display: flex; align-items: center; width: calc(100% - 33px); height: 64px; padding: 0 15px; transform: translateX(-50%); border: 1px solid var(--agent-glass-edge); border-radius: 36px; background: var(--agent-glass-fill); box-shadow: var(--agent-glass-shadow); -webkit-backdrop-filter: blur(22px) saturate(160%); backdrop-filter: blur(22px) saturate(160%); }
+.agent-header--role { top: 20px; }
+.agent-header__brand { width: 32px; height: 32px; flex: none; }
+.agent-header__wordmark { margin-left: 9px; color: var(--agent-ink); font-size: 12px; line-height: 18px; font-weight: 700; }
+.agent-header__role { display: grid; width: 61px; height: 22px; margin-left: auto; place-items: center; border-radius: 19px; background: var(--agent-primary); color: #fff; font-size: 8px; }
+.agent-header__actions { display: flex; align-items: center; gap: 16px; margin-left: auto; }
+.agent-header--role .agent-header__actions { margin-left: 9px; gap: 16px; }
+.agent-header__actions button { display: grid; width: 20px; height: 24px; padding: 0; place-items: center; border: 0; background: transparent; }
+.agent-header__actions img { display: block; width: 20px; height: 20px; }
+
+.agent-button.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 28px; border: 1px solid rgba(216,207,207,.6); font-size: 8px; line-height: 16px; font-weight: 700; box-shadow: none; }
+.agent-button--primary.btn { border-color: #c4b2b2; background: var(--agent-primary); color: #fff; }
+.agent-button--secondary.btn { border-color: rgba(216,207,207,.6); background: #fbfbfb; color: var(--agent-ink); }
+.agent-button--danger.btn { border-color: #e43434; background: #e43434; color: #fff; }
+.agent-button.btn--full-width { width: 100%; }
+
+.agent-bottom-nav { position: absolute; z-index: 10; bottom: 16px; left: 50%; display: flex; align-items: center; justify-content: space-around; width: min(358px, calc(100% - 32px)); height: 64px; padding: 5px 30px 3px; transform: translateX(-50%); border: 1px solid var(--agent-glass-edge); border-radius: 36px; background: var(--agent-glass-fill); box-shadow: var(--agent-glass-shadow); -webkit-backdrop-filter: blur(22px) saturate(160%); backdrop-filter: blur(22px) saturate(160%); }
+.agent-bottom-nav__item { display: flex; min-width: 52px; flex-direction: column; align-items: center; justify-content: center; gap: 0; padding: 0; border: 0; background: transparent; color: var(--agent-ink); }
+.agent-bottom-nav__item img { display: block; width: 28px; height: 28px; object-fit: contain; }
+.agent-bottom-nav__item span { font-size: 8px; line-height: 11px; font-weight: 600; }
+.agent-bottom-nav__item:disabled { opacity: 1; cursor: default; }
+.agent-fab { position: absolute; z-index: 11; bottom: 104px; left: calc(50% + 126px); display: grid; width: 56px; height: 56px; padding: 0; place-items: center; border: 0; border-radius: 50%; background: #fff; box-shadow: 0 4px 18px rgba(10,13,38,.22); }
+.agent-fab img { width: 18px; height: 18px; }
+
+@media (max-width: 389px) {
+  .agent-header__role { width: 56px; }
+  .agent-header--role .agent-header__actions { gap: 11px; margin-left: 7px; }
+  .agent-fab { right: 15px; left: auto; }
+}
+
+@media (min-width: 600px) {
+  .agent-app { margin: 24px auto; border-radius: 10px; box-shadow: 0 4px 24px rgba(17,18,56,.12); }
+}

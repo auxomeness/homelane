@@ -1,6 +1,7 @@
-import Button from '../../components/button.js';
-import AgentHeader from '../shared/AgentHeader.js';
-import type { AgentScreen } from '../shared/AgentNavigation.js';
+import Button from '../../../components/button.js';
+import AgentHeader from '../../shared/AgentHeader.js';
+import type { AgentScreen } from '../../shared/AgentNavigation.js';
+import './dashboardStyles.css';
 
 interface AgentDashboardProps { onNavigate: (screen: AgentScreen) => void; }
 

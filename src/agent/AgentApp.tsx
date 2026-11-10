@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import AgentDashboard from './pages/AgentDashboard.js';
-import AgentAddListing from './pages/AgentAddListing.js';
-import AgentListings from './pages/AgentListings.js';
+import AgentDashboard from './pages/dashboard/AgentDashboard.js';
+import AgentAddListing from './pages/add-listing/AgentAddListing.js';
+import AgentListings from './pages/listings/AgentListings.js';
 import AgentNavigation, { type AgentScreen } from './shared/AgentNavigation.js';
-import './agent.css';
+import './shared/sharedStyles.css';
 
 const paths: Record<AgentScreen, string> = {
   dashboard: '/agent/dashboard',
