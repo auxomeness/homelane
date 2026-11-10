@@ -26,7 +26,7 @@ export default function ReviewGrid({
     ).format(intPrice)
 
     return(
-            <div className="review-container">
+            <section className="review-container">
                 <div className="review-name">
                     <div className="review-name-image">
                     {image}
@@ -46,6 +46,6 @@ export default function ReviewGrid({
                         <Status status={status}/>
                     </div>
 
-            </div>
+            </section>
     );
 }

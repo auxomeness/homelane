@@ -15,6 +15,7 @@ export default function AdminListingReview() {
     const [searchQuery, setSearchQuery] = useState("");
 
     const normalizedQuery = searchQuery.trim().toLowerCase();
+
     const filteredListings = listData.filter((list) => {
         const matchesCategory = selectedCategory === "All" ||
             (selectedCategory === "Rejected" ? list.status === "cancelled" :
@@ -23,7 +24,7 @@ export default function AdminListingReview() {
         return matchesCategory && matchesSearch;
     });
     return(
-        <div className="listing-container">
+        <article className="listing-container">
             <AdminHeader/>
             <AdminNavigation/>
 
@@ -37,18 +38,18 @@ export default function AdminListingReview() {
                 <SearchFilter searchQuery={searchQuery} onSearchChange={setSearchQuery}/>
             </div>
 
-            <div className="review-grid-container">
+            <section className="review-grid-container">
                 <div className="review-grid-container-header">
                 <h2>Review queue</h2>
                 <span>{filteredListings.length} Listings</span>
                 </div>
 
-                <div className="review-grid-container-labels">
+                <header className="review-grid-container-labels">
                         <span>Property</span>
                         <span>Location</span>
                         <span>Asking price</span>
                         <span>Status</span>
-                </div>
+                </header>
 
                 {filteredListings.map((list) => (
                     <ReviewGrid
@@ -61,7 +62,7 @@ export default function AdminListingReview() {
                         />
                 ))}
                 {filteredListings.length === 0 && <p className="review-empty">No listings match your filters.</p>}
-            </div>
-        </div>
+            </section>
+        </article>
     );
 }

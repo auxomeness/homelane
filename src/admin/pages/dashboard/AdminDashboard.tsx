@@ -14,7 +14,7 @@ import { Link, Outlet } from 'react-router';
 
 export default function AdminDashboard() {
     return(
-        <div className='admin-container'>
+        <section className='admin-container'>
             <AdminHeader/>
             <AdminNavigation/>
 
@@ -44,7 +44,7 @@ export default function AdminDashboard() {
                 </section>
 
                 <section className='admin-reviews'>
-                    <div>
+                    <article>
                         <h2>Listing reviews</h2>
 
 
@@ -55,11 +55,11 @@ export default function AdminDashboard() {
                             </Link>
 
                         ))}
-                    </div>
+                    </article>
                 </section>
             </article>
 
             <Outlet/>
-        </div>
+        </section>
     );
 }

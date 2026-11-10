@@ -4,11 +4,11 @@ import './agentReviewPagesStyles.css'
 
 export default function AdminAgentReview() {
     return(
-        <div className="agent-container">
+        <section className="agent-container">
             <AdminHeader/>
             <AdminNavigation/>
             <h1>Admin agent review page</h1>
-        </div>
+        </section>
 
     );
 }
