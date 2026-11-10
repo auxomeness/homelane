@@ -1,9 +1,11 @@
-import './agentReviewStyles.css'
+import './agentReviewPagesStyles.css'
 
 export default function AdminAgentReview() {
     return(
-        <>
-        <h1>Admin agent review page</h1>
-        </>
+        <div className="agent-container">
+
+            <h1>Admin agent review page</h1>
+        </div>
+
     );
 }

@@ -1,4 +1,4 @@
-import { ListCheck, MoveRight, User } from 'lucide-react';
+import { ListCheck, User } from 'lucide-react';
 import StatCard from '../../components/dashboard/StatCard';
 import AdminHeader from '../../shared/AdminHeader'
 import AdminNavigation from '../../shared/AdminNavigation';
@@ -30,39 +30,32 @@ export default function AdminDashboard() {
 
             <article id='admin-reviews-container'>
                 <section className='admin-reviews'>
-                    <div className="agent-reviews-card">
+                    <div>
                         <h2>Agent reviews</h2>
 
                         {Agents.map((agent) => (
+                            <Link to={agent.location} className='card-list'>
                             <AgentGrid image={ agent.image } name={ agent.name } title={ agent.title } location={ agent.location } status={ agent.status }/>
+                            </Link>
                             
                         ))}
                     </div>
 
-                    <div className="card-section-breaker"></div>
-
-                    <Link to="/admin/agent-reviews" className="card-link" viewTransition>
-                    <p>View all agent reviews</p>
-                    <MoveRight size={15}/>
-                    </Link> 
                 </section>
 
                 <section className='admin-reviews'>
-                    <div className="agent-reviews-card">
+                    <div>
                         <h2>Listing reviews</h2>
 
+
                         {Lists.map((list) => (
+                            
+                            <Link to={list.location} className='card-list'>
                             <ListGrid image={ list.image } name={ list.name } title={ list.title } location={ list.location } status={ list.status }/>
+                            </Link>
                             
                         ))}
                     </div>
-
-                    <div className="card-section-breaker"></div>
-
-                    <Link to="/admin/listing-reviews" className="card-link" viewTransition>
-                    <p>View all listing reviews</p>
-                    <MoveRight size={15}/>
-                    </Link> 
                 </section>
             </article>
 
