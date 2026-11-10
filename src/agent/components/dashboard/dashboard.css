@@ -12,3 +12,12 @@
 .agent-metric-card__label h2 { margin: 0; font-size: .95rem; font-weight: 600; }
 .agent-metric-card__value { margin-top: .75rem; color: #1e1b4b; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; line-height: 1.05; }
 .agent-metric-card p { margin: .35rem 0 0; color: #777582; font-size: .85rem; }
+
+@media (max-width: 560px) {
+  .agent-metric-card { padding: .9rem .85rem; }
+  .agent-metric-card__label { align-items: flex-start; gap: .4rem; }
+  .agent-metric-card__label svg { width: 18px; height: 18px; flex: 0 0 auto; }
+  .agent-metric-card__label h2 { font-size: .78rem; line-height: 1.2; }
+  .agent-metric-card__value { margin-top: .6rem; font-size: 2rem; }
+  .agent-metric-card p { font-size: .72rem; line-height: 1.3; }
+}
