@@ -1,10 +1,10 @@
 import { Eye, LayoutDashboard, List, Plus } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
-export type AgentScreen = 'dashboard' | 'listings' | 'addListing';
+export type AgentScreen = 'dashboard' | 'listings' | 'addListing' | 'viewings';
 
 interface AgentNavigationProps {
-  screen: AgentScreen;
+  screen: AgentScreen | null;
   onNavigate: (screen: AgentScreen) => void;
 }
 
@@ -12,6 +12,7 @@ const navItems: { label: string; screen: AgentScreen; icon: LucideIcon }[] = [
   { label: 'Overview', screen: 'dashboard', icon: LayoutDashboard },
   { label: 'My listings', screen: 'listings', icon: List },
   { label: 'Add listing', screen: 'addListing', icon: Plus },
+  { label: 'Viewings', screen: 'viewings', icon: Eye },
 ];
 
 export default function AgentNavigation({ screen, onNavigate }: AgentNavigationProps) {
@@ -35,10 +36,6 @@ export default function AgentNavigation({ screen, onNavigate }: AgentNavigationP
             <span className="agent-nav-item__label">{label}</span>
           </button>
         ))}
-        <button type="button" className="agent-nav-item" aria-label="Viewings" title="Viewings" disabled aria-disabled="true">
-          <Eye className="agent-nav-item__icon" size={22} aria-hidden="true" />
-          <span className="agent-nav-item__label">Viewings</span>
-        </button>
       </div>
     </nav>
   );

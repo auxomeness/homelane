@@ -7,6 +7,8 @@ import AgentApp, { AgentIndexRedirect } from "./agent/AgentApp";
 import AgentDashboard from "./agent/pages/dashboard/AgentDashboard";
 import AgentListings from "./agent/pages/listings/AgentListings";
 import AgentAddListing from "./agent/pages/add-listing/AgentAddListing";
+import AgentListingDetails from "./agent/pages/listing-details/AgentListingDetails";
+import AgentWorkspacePage from "./agent/pages/workspace/AgentWorkspacePage";
 
 const AppRoutes = createBrowserRouter([
     // ------- Root page where the auth gate should be placed -------
@@ -54,8 +56,14 @@ const AppRoutes = createBrowserRouter([
         children: [
             { index: true, Component: AgentIndexRedirect },
             { path: "dashboard", Component: AgentDashboard },
+            { path: "my-listings/:listingId", Component: AgentListingDetails },
             { path: "my-listings", Component: AgentListings },
-            { path: "add-listings", Component: AgentAddListing }
+            { path: "add-listings", Component: AgentAddListing },
+            { path: "viewings", Component: AgentWorkspacePage },
+            { path: "activity", Component: AgentWorkspacePage },
+            { path: "inquiries", Component: AgentWorkspacePage },
+            { path: "messages", Component: AgentWorkspacePage },
+            { path: "profile", Component: AgentWorkspacePage }
         ]
     }
 
