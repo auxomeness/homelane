@@ -11,7 +11,7 @@ const navItems: NavItem[] = [
     { label: 'Overview', path: '' },
     { label: 'Listing reviews', path: 'listing-reviews' },
     { label: 'Agent reviews', path: 'agent-reviews' },
-    { label: 'Viewings', path: 'viewings' }
+
 ]
 
 export default function AdminNavigation() {

@@ -10,6 +10,7 @@ export interface CategoryFilterProps {
 export interface SeearchFilterProps {
     searchQuery: string,
     onSearchChange: (query: string) => void;
+    placeholder: string;
 }
 
 export interface list {
@@ -68,16 +69,10 @@ export const Agents = [
     {
         image:'', name: "Syxied Sebven Abelado", title: "PRC#0029182", location: "Naga City, PH", status: "cancelled"
     },
-] as const
-
-export const Lists = [
     {
-        image:'', name: "Ateneo de Naga University", title: "PRC#0029182", price: 1200000, location: "Naga City, PH", status: "pending"
+        image:'', name: "Syxied Sebven Abelado", title: "PRC#0029182", location: "Naga City, PH", status: "cancelled"
     },
     {
-        image:'', name: "BGC Courtside", title: "PRC#0029183", price: 64000200, location: "San Fernando City, PH", status: "approved"
-    },
-    {
-        image:'', name: "Molave Town Street", title: "PRC#0029182", price: 3400383, location: "Naga City, PH", status: "cancelled"
+        image:'', name: "Syxied Sebven Abelado", title: "PRC#0029182", location: "Naga City, PH", status: "cancelled"
     },
 ] as const

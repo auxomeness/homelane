@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import "./sharedStyles.css"
 
 import Status, { type StatusType } from "./Status";
@@ -26,6 +27,7 @@ export default function ReviewGrid({
     ).format(intPrice)
 
     return(
+        <Link to={'/'}>
             <section className="review-container">
                 <div className="review-name">
                     <div className="review-name-image">
@@ -47,5 +49,6 @@ export default function ReviewGrid({
                     </div>
 
             </section>
+        </Link>
     );
 }

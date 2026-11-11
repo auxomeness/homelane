@@ -3,7 +3,7 @@ import AdminHeader from '../../shared/AdminHeader';
 import AdminNavigation from '../../shared/AdminNavigation';
 import CategoryFilter from '../../../components/CategoryFilter';
 import { listData, type CategoryStatus } from '../../libs/listData';
-import ReviewGrid from '../../shared/ReviewGrid';
+import ListReviewGrid from '../../shared/ListReviewGrid';
 import SearchFilter from '../../../components/SearchFIlter';
 
 import './adminListingReviewStyles.css'
@@ -35,7 +35,7 @@ export default function AdminListingReview() {
 
             <div className="listing-filter">
                 <CategoryFilter selectedCategory={selectedCategory} onCategoryChange={setSelectedCategory}/>
-                <SearchFilter searchQuery={searchQuery} onSearchChange={setSearchQuery}/>
+                <SearchFilter searchQuery={searchQuery} onSearchChange={setSearchQuery} placeholder='listings'/>
             </div>
 
             <section className="review-grid-container">
@@ -45,14 +45,14 @@ export default function AdminListingReview() {
                 </div>
 
                 <div className="review-grid-container-labels">
-                        <span>Property</span>
+                        <span>Agent</span>
                         <span>Location</span>
-                        <span>Asking price</span>
+                        <span>Submission</span>
                         <span>Status</span>
                 </div>
 
                 {filteredListings.map((list) => (
-                    <ReviewGrid
+                    <ListReviewGrid
                         key={list.title}
                         image={list.image}
                         title={list.title}

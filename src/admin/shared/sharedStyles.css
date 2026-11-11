@@ -1,7 +1,7 @@
 /* --------- Admin Header ------------ */
 
 #admin-header {
-    background: rgba(184, 184, 185, 0.45);
+    background: rgba(30, 27, 75, .45);
     backdrop-filter: blur(1rem);
     -webkit-backdrop-filter: blur(1rem);
 
@@ -84,7 +84,7 @@
 
 
 
-/* --------- Review Grid ----------------- */
+/* --------- List Review Grid ----------------- */
 
 .review-container {
   display: grid;
@@ -124,7 +124,7 @@
     gap: 3rem;
 }
 
-/* --------- Review Grid ----------------- */
+/* --------- List Review Grid ----------------- */
 
 
 
