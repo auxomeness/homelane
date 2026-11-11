@@ -1,4 +1,4 @@
-export type AgentListingStatus = 'active' | 'pending' | 'rejected';
+export type AgentListingStatus = 'active' | 'pending' | 'rejected' | 'draft';
 
 export interface AgentListingData {
   id: string;
@@ -8,6 +8,12 @@ export interface AgentListingData {
   status: AgentListingStatus;
   statusLabel: string;
   actionLabel: string;
+  propertyType?: string;
+  description?: string;
+  photos?: string[];
+  bedrooms?: number;
+  bathrooms?: number;
+  floorArea?: number;
 }
 
 export const agentListings: AgentListingData[] = [

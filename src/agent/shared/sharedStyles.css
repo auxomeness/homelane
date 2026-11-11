@@ -83,6 +83,21 @@
 .agent-status-pill--active { background: #e0f4e9; color: #176b43; }
 .agent-status-pill--pending { background: #fff0d7; color: #855a12; }
 .agent-status-pill--rejected { background: #fbe5ea; color: #99394e; }
+.agent-status-pill--draft { background: #e9e6f1; color: #514a70; }
+.agent-empty-state { padding: 1rem; margin: 0; border-radius: .75rem; background: rgba(255,255,255,.48); color: var(--agent-muted); text-align: center; }
+.agent-inquiry--button { width: 100%; border: 1px solid rgba(30,27,75,.1); color: inherit; text-align: left; cursor: pointer; }
+.agent-inquiry--button:hover { background: rgba(255,255,255,.92); }
+.agent-header__menu-wrap { position: relative; display: grid; place-items: center; }
+.agent-header__badge { position: absolute; top: -.35rem; right: -.5rem; display: grid; min-width: 1.1rem; height: 1.1rem; padding: 0 .2rem; place-items: center; border-radius: 99px; background: #a32945; color: #fff; font-size: .65rem; font-weight: 700; }
+.agent-header__popover { position: absolute; z-index: 80; top: calc(100% + .9rem); right: 0; width: min(19rem, calc(100vw - 2rem)); padding: 1rem; border: 1px solid rgba(255,255,255,.65); border-radius: .9rem; background: rgba(255,255,255,.96); box-shadow: 0 .8rem 2rem rgba(31,38,135,.18); color: var(--agent-ink); }
+.agent-header__popover h3 { margin: 0 0 .4rem; font-size: .95rem; }
+.agent-header__popover p { margin: 0 0 .75rem; color: var(--agent-muted); font-size: .82rem; }
+.agent-header__popover > button { padding: .45rem .65rem; border: 0; border-radius: .5rem; background: rgba(30,27,75,.08); color: var(--agent-ink); font: inherit; font-size: .8rem; font-weight: 600; cursor: pointer; }
+.agent-pagination { display: flex; align-items: center; justify-content: center; gap: 1rem; padding-top: 1.25rem; }
+.agent-pagination button { padding: .45rem .75rem; border: 1px solid var(--agent-border); border-radius: .5rem; background: rgba(255,255,255,.7); color: var(--agent-ink); cursor: pointer; }
+.agent-pagination button:disabled { opacity: .45; cursor: not-allowed; }
+.agent-pagination span { color: var(--agent-muted); font-size: .82rem; }
+.agent-inquiry__new { flex-shrink: 0; }
 
 @media (max-width: 760px) {
   .agent-app { padding: 1rem 1rem 7rem; }
