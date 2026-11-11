@@ -28,10 +28,10 @@ export default function AdminAgentReview() {
             <AdminHeader/>
             <AdminNavigation/>
 
-            <div id='agent-header'>
+            <header id='agent-header'>
                 <h1>Agent reviews</h1>
                 <p>Manage and review agent submissions</p>
-            </div>
+            </header>
 
             <div className="agent-filter">
                 <CategoryFilter selectedCategory={selectedCategory} onCategoryChange={setSelectedCategory}/>
@@ -39,17 +39,17 @@ export default function AdminAgentReview() {
             </div>
 
             <section className="review-grid-container">
-                <div className="review-grid-container-header">
+                <header className="review-grid-container-header">
                 <h2>Review queue</h2>
                 <span>{filteredAgents.length} Submissions</span>
-                </div>
+                </header>
 
-                <div className="review-grid-container-labels">
+                <header className="review-grid-container-labels">
                         <span>Agent</span>
                         <span>Location</span>
                         <span>Submission</span>
                         <span>Status</span>
-                </div>
+                </header>
 
                 {filteredAgents.map((agent) => (
                     <AgentReviewGrid 

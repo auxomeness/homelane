@@ -13,9 +13,33 @@ export interface SeearchFilterProps {
     placeholder: string;
 }
 
-export interface list {
-    image: string;
+
+// ----------------- Grid Details -------------------------- 
+
+export interface AgentReviewGridProps {
+    // link: string,
+    image: string,
+    name: string;
+    title?: string;
+    location: string;
+    submission: string;
+    status: StatusType;
+    }
+    
+export interface ListReviewGridProps {
+    // link: string,
+    image: string,
     title: string;
+    location: string;
+    intPrice: number;
+    status: StatusType;
+    }
+// ----------------- Grid Details -------------------------- 
+    
+    
+    export interface list {
+        image: string;
+        title: string;
     location: string;
     intPrice: number;
     status: StatusType;

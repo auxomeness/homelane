@@ -24,14 +24,14 @@ export default function AdminListingReview() {
         return matchesCategory && matchesSearch;
     });
     return(
-        <article className="listing-container">
+        <main className="listing-container">
             <AdminHeader/>
             <AdminNavigation/>
 
-            <div id='listing-header'>
+            <header id='listing-header'>
                 <h1>Listing reviews</h1>
                 <p>Property facts, verified agents, and safe locations</p>
-            </div>
+            </header>
 
             <div className="listing-filter">
                 <CategoryFilter selectedCategory={selectedCategory} onCategoryChange={setSelectedCategory}/>
@@ -39,17 +39,17 @@ export default function AdminListingReview() {
             </div>
 
             <section className="review-grid-container">
-                <div className="review-grid-container-header">
+                <header className="review-grid-container-header">
                 <h2>Review queue</h2>
                 <span>{filteredListings.length} Listings</span>
-                </div>
+                </header>
 
-                <div className="review-grid-container-labels">
+                <header className="review-grid-container-labels">
                         <span>Agent</span>
                         <span>Location</span>
                         <span>Submission</span>
                         <span>Status</span>
-                </div>
+                </header>
 
                 {filteredListings.map((list) => (
                     <ListReviewGrid
@@ -63,6 +63,6 @@ export default function AdminListingReview() {
                 ))}
                 {filteredListings.length === 0 && <p className="review-empty">No listings match your filters.</p>}
             </section>
-        </article>
+        </main>
     );
 }

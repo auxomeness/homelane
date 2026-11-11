@@ -1,23 +1,10 @@
 
 import { Link } from 'react-router';
 import './sharedStyles.css'
-import Status, {type StatusType } from './Status';
+import Status from './Status';
+import type { AgentReviewGridProps, ListReviewGridProps } from '../libs/listData';
 
-interface AgentReviewGridProps {
-        image: string,
-        name: string;
-        location: string;
-        submission: string;
-        status: StatusType;
-}
 
-interface ListReviewGridProps {
-    image: string,
-    title: string;
-    location: string;
-    intPrice: number;
-    status: StatusType;
-}
 
 
 export function AgentReviewGrid( {
@@ -53,6 +40,8 @@ export function AgentReviewGrid( {
         </Link>
     );
 }
+
+
 
 export function ListReviewGrid({
     image,

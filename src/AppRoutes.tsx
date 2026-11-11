@@ -4,6 +4,7 @@ import App from "./App";
 import AdminListingReview from "./admin/pages/listing-review/AdminListingReview";
 import AdminAgentReview from "./admin/pages/agent-review/AdminAgentReview";
 import AgentApp from "./agent/AgentApp";
+import AdminAgentDetails from "./admin/pages/agent-review/AdminAgentDetails";
 
 const AppRoutes = createBrowserRouter([
     // ------- Root page where the auth gate should be placed -------
@@ -25,11 +26,22 @@ const AppRoutes = createBrowserRouter([
     },
     {
         path: "/admin/listing-reviews",
-        Component: AdminListingReview
+        Component: AdminListingReview,
+        // children: 
+        // // [
+        // //     path: "/admin/listing-reviews/details",
+        // //      Component: <AdminListingDetails/>
+        // // ]
     },
     {
         path: "/admin/agent-reviews",
-        Component: AdminAgentReview
+        Component: AdminAgentReview,
+        children: [
+            {
+            path: "/admin/agent-reviews/detail",
+            element: <AdminAgentDetails image={""} name={""} location={""} submission={""} status={"pending"}/>,
+            },
+        ]
     },
 
 
