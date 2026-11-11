@@ -5,8 +5,7 @@
   "type": "module",
   "packageManager": "npm@12.2.1",
   "engines": {
-    "node": ">=24 <25",
-    "npm": ">=12 <13"
+    "node": ">=24 <25"
   },
   "scripts": {
     "dev": "vite",
