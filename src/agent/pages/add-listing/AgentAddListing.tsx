@@ -1,12 +1,12 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 import Button from '../../../components/button.js';
-import type { AgentScreen } from '../../shared/AgentNavigation.js';
 import './addListingStyles.css';
 
-interface AgentAddListingProps { onNavigate: (screen: AgentScreen) => void; }
 const propertyTypes = ['House', 'Condo', 'Townhouse', 'Lot'];
 
-export default function AgentAddListing({ onNavigate }: AgentAddListingProps) {
+export default function AgentAddListing() {
+  const navigate = useNavigate();
   const [propertyType, setPropertyType] = useState('House');
 
   return (
@@ -16,7 +16,7 @@ export default function AgentAddListing({ onNavigate }: AgentAddListingProps) {
           <h1>Add property listing</h1>
           <p>Share the details buyers need to find their next home.</p>
         </div>
-        <Button className="agent-button agent-button--secondary" variant="secondary" onClick={() => onNavigate('listings')}>
+        <Button className="agent-button agent-button--secondary" variant="secondary" onClick={() => navigate('/agent/my-listings')}>
           Cancel
         </Button>
       </div>

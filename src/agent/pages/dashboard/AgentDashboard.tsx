@@ -1,12 +1,10 @@
 import { ArrowRight, CircleAlert, Clock3, House, Layers3 } from 'lucide-react';
+import { useNavigate } from 'react-router';
 import Button from '../../../components/button.js';
 import AgentMetricCard from '../../components/dashboard/AgentMetricCard.js';
 import AgentListingCard from '../../components/listings/AgentListingCard.js';
 import { agentListings } from '../../libs/listData.js';
-import type { AgentScreen } from '../../shared/AgentNavigation.js';
 import './dashboardStyles.css';
-
-interface AgentDashboardProps { onNavigate: (screen: AgentScreen) => void; }
 
 const metrics = [
   { label: 'Managed properties', value: '7', detail: 'Across your portfolio', icon: Layers3 },
@@ -15,7 +13,8 @@ const metrics = [
   { label: 'Needs attention', value: '1', detail: 'Update and resubmit', icon: CircleAlert },
 ];
 
-export default function AgentDashboard({ onNavigate }: AgentDashboardProps) {
+export default function AgentDashboard() {
+  const navigate = useNavigate();
   return (
     <main className="agent-dashboard">
       <div className="agent-page-heading">
@@ -23,7 +22,7 @@ export default function AgentDashboard({ onNavigate }: AgentDashboardProps) {
           <h1>Dashboard</h1>
           <p>An overview of your property listings and buyer inquiries.</p>
         </div>
-        <Button className="agent-button agent-button--primary" size="medium" onClick={() => onNavigate('addListing')}>
+        <Button className="agent-button agent-button--primary" size="medium" onClick={() => navigate('/agent/add-listings')}>
           + Add listing
         </Button>
       </div>
@@ -48,13 +47,13 @@ export default function AgentDashboard({ onNavigate }: AgentDashboardProps) {
               <h2>Listing activity</h2>
               <p>Recent updates across your properties</p>
             </div>
-            <button type="button" className="agent-text-action" onClick={() => onNavigate('listings')}>
+            <button type="button" className="agent-text-action" onClick={() => navigate('/agent/my-listings')}>
               View all <ArrowRight size={16} />
             </button>
           </div>
           <div className="agent-dashboard-listings__items">
             {agentListings.map((listing) => (
-              <AgentListingCard key={listing.id} listing={listing} onAction={() => onNavigate('listings')} />
+              <AgentListingCard key={listing.id} listing={listing} onAction={() => navigate('/agent/my-listings')} />
             ))}
           </div>
         </section>
@@ -65,7 +64,7 @@ export default function AgentDashboard({ onNavigate }: AgentDashboardProps) {
               <h2>Recent buyer inquiries</h2>
               <p>Follow up with interested buyers</p>
             </div>
-            <button type="button" className="agent-text-action" onClick={() => onNavigate('listings')}>
+            <button type="button" className="agent-text-action" onClick={() => navigate('/agent/my-listings')}>
               View all <ArrowRight size={16} />
             </button>
           </div>
