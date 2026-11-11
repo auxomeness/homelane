@@ -1,0 +1,45 @@
+.agent-dashboard { max-width: 1440px; margin: 0 auto; }
+.agent-page-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin: 2rem 0 1.5rem; }
+.agent-page-heading h1 { margin: 0 0 .35rem; color: var(--agent-ink); font-size: clamp(1.75rem, 3vw, 2.25rem); }
+.agent-page-heading p { margin: 0; color: var(--agent-muted); letter-spacing: .04em; }
+.agent-profile-card { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; margin-bottom: 1.25rem; border: 1px solid rgba(255,255,255,.5); border-radius: 1rem; background: rgba(255,255,255,.45); box-shadow: 0 .5rem 2rem rgba(31,38,135,.1), inset 0 .0625rem 0 rgba(255,255,255,.65); -webkit-backdrop-filter: blur(1rem); backdrop-filter: blur(1rem); }
+.agent-profile-card > img { width: 3.5rem; height: 3.5rem; border-radius: 50%; object-fit: cover; }
+.agent-profile-card__identity { min-width: 0; }
+.agent-profile-card__identity h2 { margin: 0; color: var(--agent-ink); font-size: 1rem; font-weight: 600; }
+.agent-profile-card__identity p { margin: .25rem 0 0; color: var(--agent-muted); font-size: .85rem; }
+.agent-profile-card__identity p span { margin: 0 .25rem; }
+.agent-profile-card__verified { padding: .4rem .75rem; margin-left: auto; border-radius: 99px; background: #e0f4e9; color: #176b43; font-size: .78rem; font-weight: 600; }
+.agent-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+.agent-dashboard-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(20rem, .9fr); align-items: start; gap: 1.5rem; margin-top: 1.5rem; }
+.agent-panel { min-width: 0; padding: 1.5rem; border: 1px solid rgba(255,255,255,.45); border-radius: 1rem; background: rgba(255,255,255,.52); box-shadow: 0 .5rem 2rem rgba(31,38,135,.1), inset 0 .0625rem 0 rgba(255,255,255,.65); -webkit-backdrop-filter: blur(1rem); backdrop-filter: blur(1rem); }
+.agent-panel__heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem; }
+.agent-panel__heading h2 { margin: 0; color: var(--agent-ink); font-size: 1.1rem; font-weight: 600; }
+.agent-panel__heading p { margin: .25rem 0 0; color: var(--agent-muted); font-size: .83rem; }
+.agent-panel__heading > a, .agent-text-action { display: inline-flex; align-items: center; gap: .45rem; padding: .2rem 0; border: 0; border-bottom: 1px solid transparent; background: transparent; color: var(--agent-ink); font: inherit; font-size: .84rem; font-weight: 600; white-space: nowrap; cursor: pointer; }
+.agent-panel__heading > a:hover, .agent-text-action:hover { border-bottom-color: currentColor; }
+.agent-dashboard-listings__items { display: grid; gap: .75rem; }
+.agent-dashboard-listings .agent-listing-row { grid-template-columns: 3.5rem minmax(0,1fr); gap: .75rem; padding: .8rem; }
+.agent-dashboard-listings .agent-listing-row__thumb { width: 3.5rem; height: 3.5rem; }
+.agent-dashboard-listings .agent-listing-row__action { display: none; }
+.agent-dashboard-listings .agent-listing-row__title-line { align-items: flex-start; flex-direction: column; gap: .35rem; }
+.agent-inquiries { display: grid; gap: .75rem; }
+.agent-inquiry { display: grid; grid-template-columns: 2.75rem minmax(0,1fr) auto; align-items: center; gap: .75rem; padding: .9rem; border: 1px solid rgba(30,27,75,.1); border-radius: .8rem; background: rgba(255,255,255,.72); }
+.agent-inquiry__avatar { display: grid; width: 2.75rem; height: 2.75rem; place-items: center; border-radius: 50%; background: #e7e4f1; color: var(--agent-ink); font-size: .8rem; font-weight: 700; }
+.agent-inquiry h3 { margin: 0; color: var(--agent-ink); font-size: .9rem; font-weight: 600; }
+.agent-inquiry p { margin: .25rem 0 0; color: var(--agent-muted); font-size: .78rem; line-height: 1.45; }
+.agent-inquiry__new { padding: .25rem .55rem; border-radius: 99px; background: #e0f4e9; color: #176b43; font-size: .7rem; font-weight: 700; text-transform: uppercase; }
+
+@media (max-width: 1080px) {
+  .agent-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .agent-dashboard-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 560px) {
+  .agent-page-heading { align-items: flex-start; flex-direction: column; }
+  .agent-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; }
+  .agent-profile-card { padding: .85rem; }
+  .agent-panel { padding: 1rem; }
+  .agent-panel__heading { align-items: flex-start; flex-direction: column; }
+  .agent-inquiry { grid-template-columns: 2.5rem minmax(0,1fr); }
+  .agent-inquiry__new { grid-column: 2; justify-self: start; }
+}

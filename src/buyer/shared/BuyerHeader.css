@@ -1,0 +1,67 @@
+.buyer-header {
+  display: flex;
+  align-items: center;
+  height: 58px;
+  padding: 0 21px;
+  border: 1px solid rgba(255,255,255,.86);
+  border-radius: var(--buyer-radius-pill);
+  background: rgba(255,255,255,.78);
+  box-shadow: var(--buyer-card-shadow);
+  backdrop-filter: blur(18px);
+}
+
+.buyer-header__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--buyer-ink);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: -.015em;
+  text-decoration: none;
+}
+
+.buyer-header__brand img {
+  display: block;
+  width: 32px;
+  height: 32px;
+}
+
+.buyer-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-left: auto;
+}
+
+.buyer-header__actions a {
+  display: grid;
+  width: 29px;
+  height: 32px;
+  place-items: center;
+  border-radius: 50%;
+  text-decoration: none;
+}
+
+.buyer-header__actions img {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.buyer-header__actions a:hover, .buyer-header__actions a.is-current {
+  background: var(--buyer-lavender);
+}
+
+@media (max-width: 820px) {
+  .buyer-header {
+    height: 62px;
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 390px) {
+  .buyer-header__actions {
+    gap: 10px;
+  }
+}

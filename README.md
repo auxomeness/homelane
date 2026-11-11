@@ -1,12 +1,11 @@
-# Homelane
+# Homelane Frontend
 
-Starter monorepo for the Homelane web application.
+Frontend application for Homelane. The backend lives in the separate [homelane-backend](https://github.com/auxomeness/homelane-backend) repository.
 
 ## Stack
 
 - Frontend: React, TypeScript, Vite
-- Backend: Node.js, Express, TypeScript
-- Package management: npm workspaces
+- Package management: npm
 
 ## Requirements
 
@@ -17,11 +16,10 @@ Starter monorepo for the Homelane web application.
 
 ```sh
 npm install
-cp backend/.env.example backend/.env
 npm run dev
 ```
 
-The frontend runs at <http://localhost:5173>. The Express API runs at <http://localhost:3000>; Vite proxies `/api` requests to it.
+The frontend runs at <http://localhost:5173>. Start the backend separately from its repository; Vite proxies `/api` requests to <http://localhost:3000>.
 
 ## Other commands
 
@@ -30,5 +28,3 @@ npm run build
 npm start
 npm run lint
 ```
-
-The backend keeps the IPT2ME module layout under `backend/src`: controllers, database, middleware, models, routes, services, utilities, and validators. Empty folders are retained with `.gitkeep` until implementation begins.
