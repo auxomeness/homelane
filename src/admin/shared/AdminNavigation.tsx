@@ -16,7 +16,6 @@ const navItems: NavItem[] = [
 
 export default function AdminNavigation() {
     return(
-        <>
         <nav id='admin-nav'>
             <div className="nav-title">
                 <h3>Workspace</h3>
@@ -35,6 +34,5 @@ export default function AdminNavigation() {
                 ))}
             </div>
         </nav>
-        </>
     );
 }

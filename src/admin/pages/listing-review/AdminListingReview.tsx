@@ -44,12 +44,12 @@ export default function AdminListingReview() {
                 <span>{filteredListings.length} Listings</span>
                 </div>
 
-                <header className="review-grid-container-labels">
+                <div className="review-grid-container-labels">
                         <span>Property</span>
                         <span>Location</span>
                         <span>Asking price</span>
                         <span>Status</span>
-                </header>
+                </div>
 
                 {filteredListings.map((list) => (
                     <ReviewGrid
