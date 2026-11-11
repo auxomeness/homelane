@@ -3,7 +3,7 @@ import AdminHeader from '../../shared/AdminHeader';
 import AdminNavigation from '../../shared/AdminNavigation';
 import CategoryFilter from '../../../components/CategoryFilter';
 import { listData, type CategoryStatus } from '../../libs/listData';
-import ListReviewGrid from '../../shared/ListReviewGrid';
+import {ListReviewGrid} from '../../shared/ReviewGrid';
 import SearchFilter from '../../../components/SearchFIlter';
 
 import './adminListingReviewStyles.css'

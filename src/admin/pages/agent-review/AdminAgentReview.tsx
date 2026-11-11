@@ -6,7 +6,7 @@ import { Agents, type CategoryStatus } from '../../libs/listData';
 import SearchFilter from '../../../components/SearchFIlter';
 
 import './adminAgentReviewStyles.css'
-import AgentReviewGrid from '../../shared/AgentReviewGrid';
+import { AgentReviewGrid } from '../../shared/ReviewGrid';
 
 
 export default function AdminAgentReview() {
