@@ -115,11 +115,12 @@ export default function MapDiscovery() {
 
       <FilterChips filters={appliedFilters} onRemove={(key) => setFilter(key as keyof Filters, '')} onClearAll={clearFilters} />
 
-      {!loading && (properties.length === 0 ? (
-        <StateMessage icon="search" title="No properties available yet." text="New listings will appear here once they are published." />
-      ) : locations.length === 0 ? (
+      {!loading && (locations.length === 0 ? (
+        // Figma "No homes found" frame. The button only appears when there is a search or filter to clear.
         <StateMessage icon="search" title="No homes found" text="Try a nearby barangay, or clear the search to see every listing again.">
-          <Button variant="secondary" onClick={clearFilters}>Clear search</Button>
+          {(filters.area || appliedFilters.length > 0) && (
+            <Button variant="secondary" onClick={clearFilters}>Clear search</Button>
+          )}
         </StateMessage>
       ) : (
         <section className="recommended" aria-label="Recommended Locations">

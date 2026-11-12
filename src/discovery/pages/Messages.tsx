@@ -28,7 +28,7 @@ export default function Messages() {
       {mine.length === 0 ? (
         <StateMessage
           icon="chat"
-          title="No conversations yet."
+          title="No messages yet"
           text="When you send an inquiry to an agent, the conversation shows up here."
         >
           <Button className="state-message__button" onClick={() => onNavigate('properties')}>Browse properties</Button>

@@ -103,7 +103,7 @@
 .location-card__field:focus-within { outline: 2px solid var(--deep-purple); outline-offset: 1px; }
 
 .filter-selects { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
-.filter-selects select { height: 38px; min-width: 0; padding: 0 12px; border: 1px solid var(--edge); border-radius: 999px; background: #fff; color: var(--dark-ink); font-size: 13px; font-weight: 500; }
+.filter-selects select { height: 30px; min-width: 0; padding: 0 24px 0 12px; border: 1px solid var(--edge); border-radius: 999px; appearance: none; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none' stroke='%230f172a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1l4 4 4-4'/%3E%3C/svg%3E") no-repeat right 10px center; color: var(--dark-ink); font-size: 12px; font-weight: 500; }
 .filter-selects select:focus-visible, .composer input:focus-visible { outline: 2px solid var(--deep-purple); outline-offset: 1px; }
 
 .filter-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; }
@@ -129,8 +129,6 @@
 .message-filter.is-active { border-color: var(--deep-purple); background: var(--deep-purple); color: #fff; }
 .message-filter:focus-visible { outline: 2px solid var(--deep-purple); outline-offset: 2px; }
 .messages-page > .state-message { margin-top: 170px; }
-.messages-page > .state-message .state-message__icon { width: 88px; height: 88px; }
-.messages-page > .state-message .state-message__icon svg { width: 36px; height: 36px; }
 
 .messages-layout { display: grid; gap: 16px; margin-top: 18px; }
 .messages-layout__list, .messages-layout__view { min-width: 0; }
@@ -235,8 +233,7 @@
 /* ---------- Small phones ---------- */
 @media (max-width: 480px) {
   /* 16px inputs stop iOS Safari from zooming the page on focus */
-  .location-card__field input, .composer input, .filter-selects select { font-size: 16px; }
-  .location-card__field { height: 38px; }
+  .location-card__field input, .composer input { font-size: 16px; }
   .discovery-header__actions { gap: 8px; }
   .discovery-header__actions button { width: 36px; height: 36px; }
   .message-filters { overflow-x: auto; }
