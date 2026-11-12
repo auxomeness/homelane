@@ -1,4 +1,5 @@
-import { formatMillions, type Property } from '../data/discoveryData.js';
+import type { Property } from '../types.js';
+import { formatMillions } from '../utils.js';
 
 interface MapPlaceholderProps {
   properties: Property[];

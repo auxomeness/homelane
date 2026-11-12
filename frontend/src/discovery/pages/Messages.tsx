@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Button from '../../components/button.js';
-import { conversations, currentUser } from '../data/discoveryData.js';
+import type { Conversation, Property } from '../types.js';
 import type { DiscoveryScreen } from '../shared/DiscoveryNavigation.js';
 import StateMessage from '../shared/StateMessage.js';
 import ConversationList from './messages/ConversationList.js';
@@ -9,6 +9,11 @@ import ConversationView from './messages/ConversationView.js';
 interface MessagesProps {
   onNavigate: (screen: DiscoveryScreen) => void;
 }
+
+// No database or login yet, so these start empty. Fill them from the API later.
+const conversations: Conversation[] = [];
+const properties: Property[] = [];
+const currentUser = { id: '' };
 
 export default function Messages({ onNavigate }: MessagesProps) {
   const [activeId, setActiveId] = useState<string | null>(null);
@@ -26,7 +31,7 @@ export default function Messages({ onNavigate }: MessagesProps) {
       {mine.length === 0 ? (
         <StateMessage
           icon="chat"
-          title="No messages yet"
+          title="No conversations yet."
           text="When you send an inquiry to an agent, the conversation shows up here."
         >
           <Button className="state-message__button" onClick={() => onNavigate('properties')}>Browse properties</Button>
@@ -51,12 +56,12 @@ export default function Messages({ onNavigate }: MessagesProps) {
               {visible.length === 0 ? (
                 <StateMessage icon="chat" title="No unread messages" text="You're all caught up." />
               ) : (
-                <ConversationList conversations={visible} activeId={activeId} viewerRole="buyer" viewerId={currentUser.id} onSelect={setActiveId} />
+                <ConversationList conversations={visible} properties={properties} activeId={activeId} viewerRole="buyer" viewerId={currentUser.id} onSelect={setActiveId} />
               )}
             </aside>
             <div className="messages-layout__view">
               {active ? (
-                <ConversationView key={active.id} conversation={active} viewerId={currentUser.id} onBack={() => setActiveId(null)} />
+                <ConversationView key={active.id} conversation={active} properties={properties} viewerId={currentUser.id} onBack={() => setActiveId(null)} />
               ) : (
                 <StateMessage icon="chat" title="Select a conversation" text="Choose a conversation to read messages and offers." />
               )}

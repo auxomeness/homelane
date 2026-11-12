@@ -1,6 +1,11 @@
-import { formatPeso, getProperty, viewingRequests } from '../data/discoveryData.js';
+import type { Property, ViewingRequest } from '../types.js';
+import { formatPeso, getProperty } from '../utils.js';
 import Icon from '../shared/Icon.js';
 import StateMessage from '../shared/StateMessage.js';
+
+// No database yet, so these start empty. Fill them from the API later.
+const viewingRequests: ViewingRequest[] = [];
+const properties: Property[] = [];
 
 // Buyer's viewing requests. A request stays "Not confirmed" until the agent responds.
 export default function Viewings() {
@@ -9,11 +14,11 @@ export default function Viewings() {
       <h1 className="discovery-title">Viewing Requests</h1>
 
       {viewingRequests.length === 0 ? (
-        <StateMessage title="No viewing requests yet" text="Request a viewing from a property to see it here." />
+        <StateMessage title="No viewing requests yet." text="Request a viewing from a property to see it here." />
       ) : (
         <ul className="viewing-list">
           {viewingRequests.map((request) => {
-            const property = getProperty(request.propertyId);
+            const property = getProperty(properties, request.propertyId);
             const confirmed = request.status === 'Confirmed';
             if (!property) return null;
             return (

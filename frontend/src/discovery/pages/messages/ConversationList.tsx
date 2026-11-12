@@ -1,7 +1,9 @@
-import { getProperty, type Conversation } from '../../data/discoveryData.js';
+import type { Conversation, Property } from '../../types.js';
+import { getProperty } from '../../utils.js';
 
 interface ConversationListProps {
   conversations: Conversation[];
+  properties: Property[];
   activeId: string | null;
   /** Which side of the conversation the signed-in user is on. */
   viewerRole: 'buyer' | 'agent';
@@ -17,16 +19,18 @@ function initials(name: string) {
   return parts.map((part) => part[0]).join('').slice(0, 2).toUpperCase();
 }
 
-export default function ConversationList({ conversations, activeId, viewerRole, viewerId, onSelect }: ConversationListProps) {
+export default function ConversationList({ conversations, properties, activeId, viewerRole, viewerId, onSelect }: ConversationListProps) {
   return (
     <ul className="conversation-list">
       {conversations.map((conversation) => {
         const last = conversation.messages[conversation.messages.length - 1];
-        const property = getProperty(conversation.propertyId);
+        const property = getProperty(properties, conversation.propertyId);
         const otherName = viewerRole === 'buyer' ? conversation.agentName : conversation.buyerName;
-        const preview = last.offer
-          ? `${last.offer.kind === 'offer' ? 'Offer' : 'Counteroffer'} sent (non-binding)`
-          : `${last.senderId === viewerId ? 'You: ' : ''}${last.text}`;
+        const preview = !last
+          ? 'No messages yet'
+          : last.offer
+            ? `${last.offer.kind === 'offer' ? 'Offer' : 'Counteroffer'} sent (non-binding)`
+            : `${last.senderId === viewerId ? 'You: ' : ''}${last.text}`;
         return (
           <li key={conversation.id}>
             <button

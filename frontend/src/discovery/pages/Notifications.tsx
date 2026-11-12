@@ -1,12 +1,6 @@
 import { useState } from 'react';
-import {
-  formatPeso,
-  getProperty,
-  notificationCategories,
-  notifications as sampleNotifications,
-  offerSummaries,
-  type NotificationCategory,
-} from '../data/discoveryData.js';
+import type { NotificationCategory, NotificationItem, OfferSummary, Property } from '../types.js';
+import { formatPeso, getProperty, notificationCategories } from '../utils.js';
 import Icon, { type IconName } from '../shared/Icon.js';
 import type { DiscoveryScreen } from '../shared/DiscoveryNavigation.js';
 import StateMessage from '../shared/StateMessage.js';
@@ -29,9 +23,14 @@ const linkLabel: Record<NotificationCategory, string> = {
   Listings: 'View Listings',
 };
 
+// No database yet, so these start empty. Fill them from the API later.
+const notifications: NotificationItem[] = [];
+const offerSummaries: OfferSummary[] = [];
+const properties: Property[] = [];
+
 export default function Notifications({ onNavigate }: NotificationsProps) {
   const [category, setCategory] = useState<'All' | NotificationCategory>('All');
-  const [items, setItems] = useState(sampleNotifications);
+  const [items, setItems] = useState(notifications);
   const [menuOpen, setMenuOpen] = useState(false);
 
   const visible = items.filter((item) => category === 'All' || item.category === category);
@@ -73,13 +72,15 @@ export default function Notifications({ onNavigate }: NotificationsProps) {
         )}
       </div>
 
-      {category === 'Offers' ? (
+      {category === 'Offers' && offerSummaries.length === 0 ? (
+        <StateMessage title="No offers yet." text="Offers you send or receive will appear here." />
+      ) : category === 'Offers' ? (
         <ul className="offer-grid" aria-label="Offers">
           {offerSummaries.map((offer) => (
             <li key={offer.id} className="offer-summary">
               <div className="offer-summary__top">
                 <span className="notification__icon is-unread"><Icon name="tag" size={18} /></span>
-                <strong>Offer for {getProperty(offer.propertyId)?.title}</strong>
+                <strong>Offer for {getProperty(properties, offer.propertyId)?.title}</strong>
               </div>
               <p className="offer-summary__meta">Agent: {offer.agentInitials}</p>
               <p className="offer-summary__meta">Proposed Offer: {formatPeso(offer.proposed)}</p>
@@ -94,7 +95,7 @@ export default function Notifications({ onNavigate }: NotificationsProps) {
           ))}
         </ul>
       ) : visible.length === 0 ? (
-        <StateMessage title="No notifications" text="You're all caught up. New activity will appear here." />
+        <StateMessage title="You have no notifications." text="New activity will appear here." />
       ) : (
         <ul className="notification-list">
           {visible.map((item) => (

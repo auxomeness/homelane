@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import Button from '../../components/button.js';
-import { areas, bedroomOptions, formatMillions, getProperty, priceRanges, properties, propertyTypes } from '../data/discoveryData.js';
+import type { Property } from '../types.js';
+import { areas, bedroomOptions, formatMillions, getProperty, priceRanges, propertyTypes } from '../utils.js';
 import FilterChips, { type AppliedFilter } from '../shared/FilterChips.js';
 import Icon from '../shared/Icon.js';
 import MapPlaceholder from '../shared/MapPlaceholder.js';
@@ -14,6 +15,9 @@ interface Filters {
 }
 
 const emptyFilters: Filters = { area: '', priceId: '', type: '', bedrooms: '' };
+
+// No database yet, so the list starts empty. Fill it from the API later.
+const properties: Property[] = [];
 
 export default function MapDiscovery() {
   const [filters, setFilters] = useState<Filters>(emptyFilters);
@@ -48,7 +52,7 @@ export default function MapDiscovery() {
     return [...byArea.values()];
   }, [results]);
 
-  const selectedArea = selectedId ? getProperty(selectedId)?.area : undefined;
+  const selectedArea = selectedId ? getProperty(properties, selectedId)?.area : undefined;
 
   const appliedFilters: AppliedFilter[] = [
     filters.priceId && { key: 'priceId', label: priceRanges.find((r) => r.id === filters.priceId)?.label ?? '' },
@@ -111,7 +115,9 @@ export default function MapDiscovery() {
 
       <FilterChips filters={appliedFilters} onRemove={(key) => setFilter(key as keyof Filters, '')} onClearAll={clearFilters} />
 
-      {!loading && (locations.length === 0 ? (
+      {!loading && (properties.length === 0 ? (
+        <StateMessage icon="search" title="No properties available yet." text="New listings will appear here once they are published." />
+      ) : locations.length === 0 ? (
         <StateMessage icon="search" title="No homes found" text="Try a nearby barangay, or clear the search to see every listing again.">
           <Button variant="secondary" onClick={clearFilters}>Clear search</Button>
         </StateMessage>

@@ -1,17 +1,19 @@
 import { useState } from 'react';
-import { getProperty, type Conversation } from '../../data/discoveryData.js';
+import type { Conversation, Property } from '../../types.js';
+import { getProperty } from '../../utils.js';
 import OfferCard from '../../shared/OfferCard.js';
 
 interface ConversationViewProps {
   conversation: Conversation;
+  properties: Property[];
   viewerId: string;
   onBack: () => void;
 }
 
-export default function ConversationView({ conversation, viewerId, onBack }: ConversationViewProps) {
+export default function ConversationView({ conversation, properties, viewerId, onBack }: ConversationViewProps) {
   const [draft, setDraft] = useState('');
   const [sent, setSent] = useState<{ id: string; text: string }[]>([]);
-  const property = getProperty(conversation.propertyId);
+  const property = getProperty(properties, conversation.propertyId);
   const otherName = conversation.participantIds[0] === viewerId ? conversation.agentName : conversation.buyerName;
 
   const send = (event: React.FormEvent) => {
@@ -33,6 +35,9 @@ export default function ConversationView({ conversation, viewerId, onBack }: Con
       </header>
 
       <div className="conversation-view__messages">
+        {conversation.messages.length === 0 && sent.length === 0 && (
+          <p className="composer__note">No messages yet. Say hello below.</p>
+        )}
         {conversation.messages.map((message) => {
           const mine = message.senderId === viewerId;
           return (

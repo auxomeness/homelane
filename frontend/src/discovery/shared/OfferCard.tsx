@@ -1,4 +1,5 @@
-import { formatPrice, type OfferStatus } from '../data/discoveryData.js';
+import type { OfferStatus } from '../types.js';
+import { formatPrice } from '../utils.js';
 
 interface OfferCardProps {
   kind: 'offer' | 'counteroffer';
