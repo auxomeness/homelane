@@ -102,8 +102,8 @@
 .location-card__field button { display: grid; padding: 0; place-items: center; border: 0; background: transparent; color: var(--muted-gray); cursor: pointer; }
 .location-card__field:focus-within { outline: 2px solid var(--deep-purple); outline-offset: 1px; }
 
-.filter-selects { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
-.filter-selects select { height: 30px; min-width: 0; padding: 0 24px 0 12px; border: 1px solid var(--edge); border-radius: 999px; appearance: none; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none' stroke='%230f172a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1l4 4 4-4'/%3E%3C/svg%3E") no-repeat right 10px center; color: var(--dark-ink); font-size: 12px; font-weight: 500; }
+.filter-selects { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+.filter-selects select { text-overflow: ellipsis; height: 30px; min-width: 0; padding: 0 24px 0 12px; border: 1px solid var(--edge); border-radius: 999px; appearance: none; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none' stroke='%230f172a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1l4 4 4-4'/%3E%3C/svg%3E") no-repeat right 10px center; color: var(--dark-ink); font-size: 12px; font-weight: 500; }
 .filter-selects select:focus-visible, .composer input:focus-visible { outline: 2px solid var(--deep-purple); outline-offset: 1px; }
 
 .filter-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; }

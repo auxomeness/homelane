@@ -13,7 +13,8 @@ function screenFromPath(path: string): DiscoveryScreen {
 
 // Opens /discovery with the Map page.
 export function DiscoveryIndexRedirect() {
-  return <Navigate to="map" replace />;
+  // Absolute path: a relative "map" would stack up as /discovery/nonsense/map/map/... on the catch-all route.
+  return <Navigate to="/discovery/map" replace />;
 }
 
 // Home and Properties are built by other teammates. These stay clickable until their pages are connected.
