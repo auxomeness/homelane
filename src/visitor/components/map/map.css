@@ -1,0 +1,10 @@
+.location-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.location-card { min-height: 8rem; display: flex; align-items: center; gap: .875rem; padding: 1.25rem; overflow: hidden; border-radius: .875rem; color: #183b35; text-decoration: none; background: linear-gradient(120deg, #edf5f0, #d9e8df); }
+.location-card--quezon { background: linear-gradient(120deg, #f4f0e5, #e9dfc7); }
+.location-card--santarosa { background: linear-gradient(120deg, #edf1e5, #dce5cd); }
+.location-card__pin { display: grid; width: 2.625rem; height: 2.625rem; flex: 0 0 auto; place-items: center; border-radius: 50%; background: rgba(255,255,255,.78); color: #28654f; }
+.location-card strong, .location-card small { display: block; }
+.location-card strong { font-size: 1rem; }
+.location-card small { margin-top: .3rem; color: #71817d; font-size: .75rem; }
+.location-card__arrow { margin-left: auto; }
+@media (max-width: 700px) { .location-grid { grid-template-columns: 1fr; } .location-card { min-height: 6.25rem; } }

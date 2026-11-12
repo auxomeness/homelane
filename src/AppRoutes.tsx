@@ -4,6 +4,9 @@ import App from "./App";
 import AdminListingReview from "./admin/pages/listing-review/AdminListingReview";
 import AdminAgentReview from "./admin/pages/agent-review/AdminAgentReview";
 import AgentApp from "./agent/AgentApp";
+import VisitorHome from "./visitor/pages/visitorHome";
+import VisitorProperties from "./visitor/pages/visitorProperties";
+import VisitorMap from "./visitor/pages/visitorMap";
 
 const AppRoutes = createBrowserRouter([
     // ------- Root page where the auth gate should be placed -------
@@ -37,7 +40,11 @@ const AppRoutes = createBrowserRouter([
 
     {
         path: "/visitor",
-        element: <h3>Place main visitor page component route in ./AppRoutes.tsx</h3>
+        children: [
+            { index: true, Component: VisitorHome },
+            { path: "properties", Component: VisitorProperties },
+            { path: "map", Component: VisitorMap }
+        ]
     },
 
     {
