@@ -1,5 +1,5 @@
-import AgentApp from './agent/AgentApp.js';
+import DiscoveryApp from './discovery/DiscoveryApp.js';
 
 export default function App() {
-  return <AgentApp />;
+  return <DiscoveryApp />;
 }

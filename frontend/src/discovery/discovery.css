@@ -20,7 +20,10 @@
   --elevation: 0 6px 8px rgba(10, 13, 38, .14);
 
   min-height: 100vh;
-  padding-bottom: 120px;
+  min-height: 100dvh;
+  padding-bottom: calc(120px + env(safe-area-inset-bottom));
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
   background: var(--canvas);
   color: var(--dark-ink);
   font-family: 'Plus Jakarta Sans', sans-serif;
@@ -37,14 +40,14 @@
   backdrop-filter: blur(14px);
   box-shadow: 0 12px 16px rgba(10, 13, 38, .22);
 }
-.discovery-header { top: 16px; padding: 0 12px 0 15px; }
+.discovery-header { top: calc(16px + env(safe-area-inset-top)); padding: 0 12px 0 15px; }
 .discovery-header__brand { width: 32px; height: 32px; }
 .discovery-header__wordmark { margin-left: 9px; color: var(--icon-ink); font-size: 12px; font-weight: 700; }
 .discovery-header__actions { display: flex; gap: 16px; margin-left: auto; }
 .discovery-header__actions button { display: grid; width: 20px; height: 20px; padding: 0; place-items: center; border: 0; background: transparent; cursor: pointer; }
 .discovery-header__actions img { width: 20px; height: 20px; }
 
-.discovery-nav { bottom: 16px; display: grid; grid-template-columns: repeat(4, 1fr); padding: 0 1.5px; }
+.discovery-nav { bottom: calc(16px + env(safe-area-inset-bottom)); display: grid; grid-template-columns: repeat(4, 1fr); padding: 0 1.5px; }
 .discovery-nav__item { position: relative; height: 64px; padding: 0; border: 0; background: transparent; color: #0f172a; cursor: pointer; }
 .discovery-nav__icon { position: absolute; top: 15px; left: 50%; display: grid; width: 28px; height: 28px; place-items: center; transform: translateX(-50%); }
 .discovery-nav__icon img { position: relative; width: 28px; height: 28px; }
@@ -228,6 +231,25 @@
 .viewing-card__banner { display: flex; align-items: flex-start; gap: 8px; margin: 4px 0 0; padding: 12px; border-radius: 8px; background: var(--soft-lavender); color: #334155; font-size: 12px; line-height: 16px; }
 .viewing-card__banner svg { flex: none; }
 .viewing-card__banner.is-confirmed { background: #d1fae5; color: #065f46; }
+
+/* ---------- Small phones ---------- */
+@media (max-width: 480px) {
+  /* 16px inputs stop iOS Safari from zooming the page on focus */
+  .location-card__field input, .composer input, .filter-selects select { font-size: 16px; }
+  .location-card__field { height: 38px; }
+  .discovery-header__actions { gap: 8px; }
+  .discovery-header__actions button { width: 36px; height: 36px; }
+  .message-filters { overflow-x: auto; }
+  .message-filter { flex: none; }
+  .conversation-view__messages { max-height: 55dvh; }
+  .conversation-view__back { width: 40px; height: 40px; }
+  .offer-card { min-width: 0; }
+}
+@media (max-width: 380px) {
+  .filter-selects { grid-template-columns: 1fr; }
+  .offer-grid { grid-template-columns: 1fr; }
+  .discovery-app .btn { min-width: 0; }
+}
 
 /* ---------- Tablet ---------- */
 @media (min-width: 640px) {
