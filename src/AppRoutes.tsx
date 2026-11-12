@@ -9,6 +9,11 @@ import AgentListings from "./agent/pages/listings/AgentListings";
 import AgentAddListing from "./agent/pages/add-listing/AgentAddListing";
 import AgentListingDetails from "./agent/pages/listing-details/AgentListingDetails";
 import AgentWorkspacePage from "./agent/pages/workspace/AgentWorkspacePage";
+import DiscoveryApp, { DiscoveryIndexRedirect, DiscoveryPlaceholder } from "./discovery/DiscoveryApp";
+import MapDiscovery from "./discovery/pages/MapDiscovery";
+import Messages from "./discovery/pages/Messages";
+import Notifications from "./discovery/pages/Notifications";
+import Viewings from "./discovery/pages/Viewings";
 
 const AppRoutes = createBrowserRouter([
     // ------- Root page where the auth gate should be placed -------
@@ -48,6 +53,22 @@ const AppRoutes = createBrowserRouter([
     {
         path: "/buyer",
         element: <h3>Place main buyer page component route in ./AppRoutes.tsx </h3>
+    },
+
+    // Property Discovery (buyer side): Map, Messages, Notifications, Viewings
+    {
+        path: "/discovery",
+        Component: DiscoveryApp,
+        children: [
+            { index: true, Component: DiscoveryIndexRedirect },
+            { path: "map", Component: MapDiscovery },
+            { path: "messages", Component: Messages },
+            { path: "notifications", Component: Notifications },
+            { path: "viewings", Component: Viewings },
+            { path: "home", element: <DiscoveryPlaceholder title="Home" /> },
+            { path: "properties", element: <DiscoveryPlaceholder title="Properties" /> },
+            { path: "*", Component: DiscoveryIndexRedirect }
+        ]
     },
 
     {
