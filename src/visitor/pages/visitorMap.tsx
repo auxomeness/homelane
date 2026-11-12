@@ -1,36 +1,40 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 import VisitorHeader from '../shared/VisitorHeader';
+import VisitorNavigation from '../shared/VisitorNavigation';
+import PropertySearch from '../components/properties/PropertySearch';
 import RecommendedLocations from '../components/map/RecommendedLocations';
-import PropertyCard from '../components/properties/PropertyCard';
-import PropertyDetailsModal from '../components/properties/PropertyDetailsModal';
-import { getPublicProperties, type Property } from '../libs/propertyData';
-import { useSavedProperties } from '../libs/useSavedProperties';
+import LoginModal from '../components/login/LoginModal';
 import '../components/home/home.css';
+import '../components/map/map.css';
 
 export default function VisitorMap() {
-  const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
-  const { savedIds, toggleSaved } = useSavedProperties();
+  const [query, setQuery] = useState('');
+  const [loginOpen, setLoginOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="visitor-page">
-      <VisitorHeader />
-      <main className="visitor-page__main">
-        <div className="visitor-section-heading">
-          <div><p className="visitor-eyebrow">Find the right neighborhood</p><h1>Explore locations</h1></div>
+      <VisitorHeader onLoginClick={() => setLoginOpen(true)} />
+      <main className="visitor-page__main visitor-map-page">
+        <h1 className="visitor-map-page__title">Map</h1>
+        <div className="visitor-map-canvas" role="img" aria-label="Map area. Public location data is not available yet.">
+          <span>Map</span>
         </div>
-        <RecommendedLocations />
-        <section className="visitor-page__section">
-          <div className="visitor-section-heading"><div><p className="visitor-eyebrow">Homes worth a closer look</p><h2>Nearby properties</h2></div></div>
-          <div className="property-grid">{getPublicProperties().map((property) => <PropertyCard
-            property={property}
-            saved={savedIds.includes(property.id)}
-            onToggleSaved={toggleSaved}
-            onViewDetails={setSelectedProperty}
-            key={property.id}
-          />)}</div>
-        </section>
+        <PropertySearch
+          className="visitor-search visitor-map-search"
+          value={query}
+          onChange={setQuery}
+          onSubmit={(search) => navigate(`/visitor/properties${search ? `?q=${encodeURIComponent(search)}` : ''}`)}
+          label="Location"
+          placeholder="City, neighborhood, or ZIP"
+        />
+        <div className="visitor-map-recommendations">
+          <RecommendedLocations title="Recommended Locations" />
+        </div>
       </main>
-      <PropertyDetailsModal property={selectedProperty} onClose={() => setSelectedProperty(null)} />
+      <VisitorNavigation />
+      <LoginModal isOpen={loginOpen} onClose={() => setLoginOpen(false)} />
     </div>
   );
 }

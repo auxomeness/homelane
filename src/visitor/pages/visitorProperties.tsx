@@ -1,33 +1,33 @@
 import { useMemo, useState } from 'react';
 import VisitorHeader from '../shared/VisitorHeader';
+import VisitorNavigation from '../shared/VisitorNavigation';
 import PropertyBrowseFilters from '../components/properties/PropertyBrowseFilters';
 import PropertyCard from '../components/properties/PropertyCard';
 import PropertyDetailsModal from '../components/properties/PropertyDetailsModal';
+import LoginModal from '../components/login/LoginModal';
 import { filterProperties, getPublicProperties, type Property, type PropertySort } from '../libs/propertyData';
 import { useSavedProperties } from '../libs/useSavedProperties';
 import '../components/home/home.css';
 
 export default function VisitorProperties() {
+  const publicProperties = useMemo(() => getPublicProperties(), []);
   const [query, setQuery] = useState(() => new URLSearchParams(window.location.search).get('q') ?? '');
   const [bedrooms, setBedrooms] = useState<number | 'any'>('any');
   const [sort, setSort] = useState<PropertySort>('recommended');
   const [savedOnly, setSavedOnly] = useState(false);
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
+  const [loginOpen, setLoginOpen] = useState(false);
   const { savedIds, toggleSaved } = useSavedProperties();
 
   const visibleProperties = useMemo(() => {
-    const filtered = filterProperties(getPublicProperties(), { query, bedrooms, sort });
+    const filtered = filterProperties(publicProperties, { query, bedrooms, sort });
     return savedOnly ? filtered.filter((property) => savedIds.includes(property.id)) : filtered;
-  }, [query, bedrooms, sort, savedOnly, savedIds]);
+  }, [publicProperties, query, bedrooms, sort, savedOnly, savedIds]);
 
   return (
     <div className="visitor-page">
-      <VisitorHeader />
+      <VisitorHeader onLoginClick={() => setLoginOpen(true)} />
       <main className="visitor-page__main visitor-properties-page">
-        <div className="visitor-section-heading">
-          <div><p className="visitor-eyebrow">Explore homes</p><h1>Properties for you</h1></div>
-          <span aria-live="polite">{visibleProperties.length} {visibleProperties.length === 1 ? 'home' : 'homes'}</span>
-        </div>
         <PropertyBrowseFilters
           query={query}
           onQueryChange={setQuery}
@@ -37,8 +37,14 @@ export default function VisitorProperties() {
           onSortChange={setSort}
           savedOnly={savedOnly}
           onSavedOnlyChange={setSavedOnly}
+          resultCount={visibleProperties.length}
         />
-        {visibleProperties.length > 0 ? (
+        {publicProperties.length === 0 ? (
+          <div className="property-empty-state">
+            <h2>No public listings available yet</h2>
+            <p>Public homes will appear here once a listings source is connected.</p>
+          </div>
+        ) : visibleProperties.length > 0 ? (
           <div className="property-grid" aria-live="polite">
             {visibleProperties.map((property) => <PropertyCard
               property={property}
@@ -56,6 +62,8 @@ export default function VisitorProperties() {
           </div>
         )}
       </main>
+      <VisitorNavigation />
+      <LoginModal isOpen={loginOpen} onClose={() => setLoginOpen(false)} />
       <PropertyDetailsModal property={selectedProperty} onClose={() => setSelectedProperty(null)} />
     </div>
   );

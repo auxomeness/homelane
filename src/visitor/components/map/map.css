@@ -7,4 +7,22 @@
 .location-card strong { font-size: 1rem; }
 .location-card small { margin-top: .3rem; color: #71817d; font-size: .75rem; }
 .location-card__arrow { margin-left: auto; }
+.visitor-map-page { padding-top: 1.2rem; }
+.visitor-map-page__title { margin: 0 0 .25rem; color: #111; font-size: 1rem; line-height: 1.25; text-transform: uppercase; }
+.visitor-map-canvas { display: grid; height: min(24rem, 52vh); min-height: 18rem; place-items: center; border: 1px solid #d4d3da; border-radius: .6rem; background: #fff; color: #6c6c6c; }
+.visitor-map-canvas span { font-size: 1rem; font-weight: 700; text-transform: uppercase; }
+.visitor-map-search { display: flex; min-height: 4.8rem; align-items: center; gap: .5rem; padding: .65rem 1rem .8rem; margin-top: .5rem; border: 1px solid #d4d3da; border-radius: .75rem; background: #fff; box-shadow: 0 .2rem .35rem rgba(20,20,40,.12); }
+.visitor-map-search .visitor-search__field { display: grid; flex: 1; gap: .25rem; }
+.visitor-map-search .visitor-search__field label { color: #35433e; font-size: .75rem; }
+.visitor-map-search input { width: 100%; min-height: 1.8rem; padding: .4rem 2.4rem .4rem .8rem; border: 1px solid #cbd4df; border-radius: 999px; background: #f8fafc; font-size: .7rem; }
+.visitor-map-search input::placeholder { color: #748092; opacity: 1; }
+.visitor-map-search button { top: calc(50% + .45rem); right: 1.35rem; display: grid; width: 1.8rem; height: 1.8rem; flex: 0 0 auto; place-items: center; padding: 0; margin-left: -2.8rem; border-radius: 50%; background: transparent; color: #566276; }
+.visitor-map-search button span { display: none; }
+.visitor-map-recommendations { margin-top: .6rem; }
+.visitor-map-recommendations .recommended-locations .visitor-section-heading { min-height: 3.2rem; justify-content: center; padding: .5rem; margin: 0 0 .35rem; background: #d9d9d9; }
+.visitor-map-recommendations .recommended-locations .visitor-section-heading .visitor-eyebrow,
+.visitor-map-recommendations .recommended-locations .visitor-section-heading > a { display: none; }
+.visitor-map-recommendations .recommended-locations .visitor-section-heading h2 { color: #666; font-size: 1rem; letter-spacing: 0; text-transform: none; }
+.visitor-map-recommendations .location-grid { grid-template-columns: 1fr; gap: .35rem; }
+.visitor-map-recommendations .location-empty { display: grid; min-height: 6.5rem; place-items: center; padding: 1rem; background: #d9d9d9; color: #666; text-align: center; }
 @media (max-width: 700px) { .location-grid { grid-template-columns: 1fr; } .location-card { min-height: 6.25rem; } }

@@ -30,7 +30,6 @@ export default function PropertyDetailsModal({ property, onClose }: PropertyDeta
             <span><Ruler size={17} /> {property.area} m²</span>
           </div>
           <p className="property-details__description">{property.description}</p>
-          <p className="property-details__demo-note">Public demo listing</p>
         </div>
       </section>
     </div>

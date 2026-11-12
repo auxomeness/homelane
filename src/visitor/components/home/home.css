@@ -9,7 +9,7 @@
 .visitor-header__login { min-width: 4.8rem; padding: .45rem 1rem; border: 0; border-radius: .55rem; background: #1e1b4b; color: #fff; font: inherit; font-size: .8rem; font-weight: 600; text-transform: uppercase; cursor: pointer; }
 .visitor-header__login:hover { background: #312e70; }
 .visitor-page__main { width: 100%; max-width: 1440px; margin: 0 auto; padding: 2rem 0; }
-.visitor-hero { min-height: 20rem; display: flex; align-items: center; padding: 2rem; border: .0625rem solid rgba(255,255,255,.48); border-radius: 1rem; color: #fff; background: linear-gradient(90deg, rgba(16, 50, 43, .83), rgba(16, 50, 43, .12)), url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1800&q=85') center 52%/cover; }
+.visitor-hero { min-height: 20rem; display: flex; align-items: center; padding: 2rem; border: .0625rem solid rgba(255,255,255,.48); border-radius: 1rem; color: #fff; background: linear-gradient(90deg, rgba(16, 50, 43, .83), rgba(16, 50, 43, .12)), center 52%/cover; }
 .visitor-hero__content { max-width: 560px; }
 .visitor-hero__eyebrow, .visitor-eyebrow { margin: 0 0 8px; color: #6e8d7f; font-size: 12px; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; }
 .visitor-hero__eyebrow { color: #d1e6da; }
@@ -32,11 +32,13 @@
 .visitor-home__shortcut-links a { padding: .55rem .85rem; border-radius: .5rem; background: #f2f6f3; color: #28654f; font-size: .875rem; font-weight: 600; }
 .visitor-home__about { min-height: 9rem; padding: 2rem; background: #e5e5e5; }
 .visitor-home__about > p { margin: 0; color: #606c68; }
+.visitor-properties-page .visitor-section-heading { margin-top: 1.5rem; }
 .announcement-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .announcement-card { padding: 1.375rem; border: 1px solid var(--visitor-line); border-radius: .875rem; background: #fff; }
 .announcement-card__date { color: var(--visitor-muted); font-size: .75rem; }
 .announcement-card h3 { margin: .625rem 0 .45rem; font-size: 1rem; }
 .announcement-card p { margin: 0; color: var(--visitor-muted); font-size: .875rem; line-height: 1.55; }
+.announcement-empty, .location-empty { margin: 0; color: var(--visitor-muted); font-size: .875rem; }
 @media (max-width: 760px) {
   .visitor-page { padding: 1rem 1rem 2rem; background: #fbf9fc; }
   .visitor-header { min-height: 4rem; padding: .85rem 1.2rem; border-radius: 999px; background: rgba(229,227,232,.9); color: #141432; box-shadow: 0 .6rem 1.7rem rgba(31,27,45,.16), inset 0 .0625rem 0 rgba(255,255,255,.9); }
@@ -44,7 +46,9 @@
   .visitor-header__brand::before { content: ''; display: block; width: 2rem; height: 2rem; border-radius: 50%; background: rgba(255,255,255,.35); }
   .visitor-header__right { gap: 1rem; }
   .visitor-header__actions { gap: .8rem; }
-  .visitor-page__main { padding: .6rem 0 1rem; }
+  .visitor-page__main { padding: .6rem 0 6rem; }
+  .visitor-properties-page { padding-top: 1.5rem; }
+  .visitor-properties-page > .visitor-section-heading { display: none; }
   .visitor-home { display: flex; flex-direction: column; }
   .visitor-home__announcements { order: 1; margin-top: .9rem; }
   .visitor-home__hero { order: 2; min-height: 4.8rem; align-items: stretch; flex-direction: column; padding: .65rem .9rem .8rem; margin-top: .25rem; border: 1px solid #d4d3da; border-radius: .6rem; background: #fff; color: var(--visitor-ink); }
@@ -68,7 +72,8 @@
   .visitor-home__announcements .visitor-section-heading { margin: 0; }
   .visitor-home__announcements .visitor-section-heading .visitor-eyebrow,
   .visitor-home__announcements .visitor-section-heading > a,
-  .visitor-home__announcements .announcement-list { display: none; }
+  .visitor-home__announcements .announcement-list,
+  .visitor-home__announcements .announcement-empty { display: none; }
   .visitor-home__announcements .visitor-section-heading h2 { color: #666; font-size: .8rem; letter-spacing: 0; text-transform: uppercase; }
   .visitor-home__about { order: 6; min-height: 9rem; justify-content: center; margin-top: 1.5rem; padding: 1.5rem; text-align: center; }
   .visitor-home__about .visitor-eyebrow { color: #222; }

@@ -1,0 +1,44 @@
+.visitor-bottom-nav { display: none; }
+
+@media (max-width: 760px) {
+  .visitor-bottom-nav {
+    position: fixed;
+    z-index: 100;
+    right: 1rem;
+    bottom: max(.85rem, env(safe-area-inset-bottom));
+    left: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    min-height: 4.25rem;
+    padding: .35rem .7rem;
+    border: 1px solid rgba(255,255,255,.72);
+    border-radius: 999px;
+    background: rgba(235,233,238,.92);
+    box-shadow: 0 .55rem 1.5rem rgba(31,27,45,.16), inset 0 .0625rem 0 rgba(255,255,255,.9);
+    -webkit-backdrop-filter: blur(1rem);
+    backdrop-filter: blur(1rem);
+  }
+
+  .visitor-bottom-nav__link {
+    display: flex;
+    min-width: 4rem;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: .05rem;
+    color: #141432;
+    text-decoration: none;
+  }
+
+  .visitor-bottom-nav__icon { display: grid; width: 2.5rem; height: 2.5rem; place-items: center; }
+  .visitor-bottom-nav__label { font-size: .62rem; line-height: 1; }
+  .visitor-bottom-nav__link.active .visitor-bottom-nav__icon {
+    width: 3rem;
+    height: 3rem;
+    margin-top: -1.25rem;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 .3rem 1rem rgba(20,20,40,.2);
+  }
+}

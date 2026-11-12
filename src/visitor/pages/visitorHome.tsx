@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import VisitorHeader from '../shared/VisitorHeader';
+import VisitorNavigation from '../shared/VisitorNavigation';
 import AnnouncementsPanel from '../components/home/AnnouncementsPanel';
 import PropertyCard from '../components/properties/PropertyCard';
 import PropertySearch from '../components/properties/PropertySearch';
@@ -25,9 +26,7 @@ export default function VisitorHome() {
       <main className="visitor-page__main visitor-home">
         <section className="visitor-hero visitor-home__hero">
           <div className="visitor-hero__content">
-            <p className="visitor-hero__eyebrow">A better place to begin</p>
-            <h1>Find a home that feels like yours.</h1>
-            <p className="visitor-hero__copy">Explore homes and neighborhoods made for the way you live.</p>
+
             <PropertySearch
               value={query}
               onChange={setQuery}
@@ -41,13 +40,13 @@ export default function VisitorHome() {
             <div><p className="visitor-eyebrow">Handpicked for you</p><h2>Featured homes</h2></div>
             <a href="/visitor/properties">Browse properties</a>
           </div>
-          <div className="property-grid">{featuredProperties.map((property) => <PropertyCard
+          {featuredProperties.length > 0 ? <div className="property-grid">{featuredProperties.map((property) => <PropertyCard
             property={property}
             saved={savedIds.includes(property.id)}
             onToggleSaved={toggleSaved}
             onViewDetails={setSelectedProperty}
             key={property.id}
-          />)}</div>
+          />)}</div> : <div className="property-empty-state visitor-home__empty"><p>No public homes available right now.</p></div>}
         </section>
         <section className="visitor-home__shortcuts" aria-labelledby="search-shortcuts-heading">
           <h2 id="search-shortcuts-heading">Search shortcuts</h2>
@@ -63,6 +62,7 @@ export default function VisitorHome() {
           <p>Explore homes and neighborhoods with Homelane.</p>
         </section>
       </main>
+      <VisitorNavigation />
       <LoginModal isOpen={loginOpen} onClose={() => setLoginOpen(false)} />
       <PropertyDetailsModal property={selectedProperty} onClose={() => setSelectedProperty(null)} />
     </div>
