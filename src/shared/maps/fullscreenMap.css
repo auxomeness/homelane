@@ -1,4 +1,5 @@
 .property-list-page { min-height: 100vh; padding: clamp(20px,4vw,52px); background: #f8f6fb; color: #241d4d; }
+.property-list-page--embedded { min-height: 60vh; padding: 24px clamp(16px,4vw,52px) 140px; }
 .property-list-header { display: flex; align-items: end; justify-content: space-between; gap: 20px; max-width: 1440px; margin: 0 auto 24px; }
 .property-list-header>div>p,.fullscreen-map-panel__title span { margin: 0 0 8px; color: #74568f; font-size: .75rem; font-weight: 800; letter-spacing: .12em; }
 .property-list-header h1 { margin: 0 0 8px; font-size: clamp(2rem,4vw,3rem); }

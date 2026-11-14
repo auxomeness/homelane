@@ -10,7 +10,6 @@ import AgentAddListing from "./agent/pages/add-listing/AgentAddListing";
 import AgentListingDetails from "./agent/pages/listing-details/AgentListingDetails";
 import AgentWorkspacePage from "./agent/pages/workspace/AgentWorkspacePage";
 import DiscoveryApp, { DiscoveryIndexRedirect, DiscoveryPlaceholder } from "./discovery/DiscoveryApp";
-import MapDiscovery from "./discovery/pages/MapDiscovery";
 import Messages from "./discovery/pages/Messages";
 import Notifications from "./discovery/pages/Notifications";
 import Viewings from "./discovery/pages/Viewings";
@@ -54,12 +53,12 @@ const AppRoutes = createBrowserRouter([
     Component: DiscoveryApp,
     children: [
       { index: true, Component: DiscoveryIndexRedirect },
-      { path: "map", Component: MapDiscovery },
+      { path: "map", Component: () => <PropertyMapPage role="buyer" mode="map" basePath="/discovery" listPath="/discovery/properties" embedded /> },
       { path: "messages", Component: Messages },
       { path: "notifications", Component: Notifications },
       { path: "viewings", Component: Viewings },
       { path: "home", element: <DiscoveryPlaceholder title="Home" /> },
-      { path: "properties", element: <DiscoveryPlaceholder title="Properties" /> },
+      { path: "properties", Component: () => <PropertyMapPage role="buyer" mode="list" basePath="/discovery" listPath="/discovery/properties" embedded /> },
       { path: "*", Component: DiscoveryIndexRedirect },
     ],
   },
