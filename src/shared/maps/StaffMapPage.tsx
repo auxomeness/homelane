@@ -1,0 +1,41 @@
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { Link, NavLink, useNavigate, useSearchParams } from 'react-router';
+import { ChevronDown, ChevronUp, X } from 'lucide-react';
+import PropertyMap, { normalizeRadiusKm, type MapPin } from './PropertyMap.js';
+import PriceRangeSelect from './PriceRangeSelect.js';
+import { getStaffListings, reviewListing, type ListingStatus, type PropertyListing } from './listingsApi.js';
+import './fullscreenMap.css';
+
+type StaffRole = 'agent' | 'admin';
+export default function StaffMapPage({ role }: { role: StaffRole }) {
+  const [params, setParams] = useSearchParams(); const navigate = useNavigate();
+  const [listings, setListings] = useState<PropertyListing[]>([]); const [visible, setVisible] = useState<PropertyListing[]>([]);
+  const [ready, setReady] = useState(false); const [loading, setLoading] = useState(true); const [error, setError] = useState(''); const [message, setMessage] = useState('');
+  const [pin, setPin] = useState<MapPin | null>(null); const [editingPin, setEditingPin] = useState(false); const [status, setStatus] = useState<ListingStatus>('active'); const [panelOpen, setPanelOpen] = useState(true);
+  const base = role === 'agent' ? '/agent' : '/admin'; const selectedId = params.get('selected'); const selected = listings.find((item) => item.id === selectedId) ?? null;
+  const query = params.get('q') ?? ''; const type = params.get('type') ?? 'all'; const min = params.get('min') ?? ''; const max = params.get('max') ?? ''; const filterStatus = params.get('status') ?? 'all'; const radius = normalizeRadiusKm(Number(params.get('radius') ?? '10'));
+  useEffect(() => { getStaffListings().then((rows) => { setListings(rows); if (!params.has('selected') && rows[0]) setParams((old) => { const next = new URLSearchParams(old); next.set('selected', rows[0].id); return next; }, { replace: true }); }).catch((reason: Error) => setError(reason.message)).finally(() => setLoading(false)); }, []);
+  useEffect(() => { if (selected) { setPin({ latitude: selected.latitude, longitude: selected.longitude }); setStatus(selected.status === 'rejected' ? 'rejected' : selected.status === 'draft' ? 'draft' : 'active'); setEditingPin(false); setMessage(''); } }, [selected?.id]);
+  const setParam = useCallback((key: string, value: string) => setParams((old) => { const next = new URLSearchParams(old); if (value) next.set(key, value); else next.delete(key); return next; }, { replace: true }), [setParams]);
+  const setPriceRange = useCallback((min: string, max: string) => setParams((old) => { const next = new URLSearchParams(old); min ? next.set('min', min) : next.delete('min'); max ? next.set('max', max) : next.delete('max'); return next; }, { replace: true }), [setParams]);
+  const filtered = useMemo(() => listings.filter((item) => `${item.title} ${item.location} ${item.description}`.toLowerCase().includes(query.trim().toLowerCase()) && (type === 'all' || item.propertyType.toLowerCase() === type.toLowerCase()) && (!min || Number(item.price) >= Number(min)) && (!max || Number(item.price) <= Number(max)) && (filterStatus === 'all' || item.status === filterStatus)), [filterStatus, listings, max, min, query, type]);
+  const onVisible = useCallback((rows: PropertyListing[]) => { setVisible(rows); setReady(true); }, []);
+  const select = useCallback((listing: PropertyListing) => setParam('selected', listing.id), [setParam]);
+  const setFilterFields = <div className="map-filter-fields"><label>Search<input value={query} onChange={(event) => setParam('q', event.target.value)} placeholder="Title or location" /></label><label>Property type<select value={type} onChange={(event) => setParam('type', event.target.value)}><option value="all">All types</option>{['House', 'Condo', 'Townhouse', 'Lot'].map((item) => <option key={item}>{item}</option>)}</select></label><PriceRangeSelect min={min} max={max} onChange={setPriceRange} />{role === 'agent' && <label>Status<select value={filterStatus} onChange={(event) => setParam('status', event.target.value)}><option value="all">All statuses</option>{(['active','pending','draft','rejected'] as ListingStatus[]).map((item) => <option key={item} value={item}>{item[0].toUpperCase()+item.slice(1)}</option>)}</select></label>}</div>;
+  const mapPath = `${base}/map${params.size ? `?${params}` : ''}`;
+  const saveReview = async () => { if (!selected || !pin) return; setError(''); setMessage(''); try { const updated = await reviewListing(selected.id, status, pin.latitude, pin.longitude); setListings((all) => all.map((item) => item.id === updated.id ? { ...item, ...updated } : item)); setMessage('Map pin and review saved.'); setEditingPin(false); } catch (reason) { setError(reason instanceof Error ? reason.message : 'Unable to save listing.'); } };
+
+  return <main className="fullscreen-map-screen">
+    <aside className={`fullscreen-map-panel${panelOpen ? '' : ' is-collapsed'}`}><div className="fullscreen-map-panel__title"><div><span>HOMELANE · {role.toUpperCase()}</span><h1>{role === 'agent' ? 'My properties' : 'All properties'}</h1></div><div className="fullscreen-map-panel__actions"><Link className="map-close" to={role === 'agent' ? `/agent/my-listings${params.size ? `?${params}` : ''}` : `/admin/listing-reviews${params.size ? `?${params}` : ''}`} aria-label="Back to listings" title="Back to listings"><X size={20} /></Link><button type="button" className="map-panel-collapse" aria-expanded={panelOpen} onClick={() => setPanelOpen((open) => !open)} aria-label={panelOpen ? 'Collapse results panel' : 'Expand results panel'}>{panelOpen ? <ChevronDown size={18} /> : <ChevronUp size={18} />}</button></div></div>
+      <div className="fullscreen-map-panel__content"><nav className="fullscreen-map-panel__tabs" aria-label={`${role} listing views`}><NavLink to={role === 'agent' ? `/agent/my-listings${params.size ? `?${params}` : ''}` : `/admin/listing-reviews${params.size ? `?${params}` : ''}`}>List</NavLink><NavLink to={mapPath}>Map</NavLink></nav>{setFilterFields}<p className="map-result-count">{ready ? visible.length : filtered.length} properties on the map</p>
+        {selected && <div className="staff-map-selected"><strong>{selected.title}</strong><span>{selected.location}</span><b>₱ {Number(selected.price).toLocaleString('en-PH')}</b><small>Status: {selected.status}</small>
+          {role === 'agent' ? <button type="button" onClick={() => navigate(`/agent/add-listings?edit=${encodeURIComponent(selected.id)}`)}>Edit details and pin</button> : <><label>Review status<select value={status} onChange={(event) => setStatus(event.target.value as ListingStatus)}><option value="active">Approve and publish</option><option value="pending">Keep pending</option><option value="rejected">Request correction</option></select></label><button type="button" onClick={() => setEditingPin((current) => !current)}>{editingPin ? 'Stop pin editing' : 'Adjust exact pin'}</button>{editingPin && <button type="button" onClick={saveReview} disabled={!pin}>Save pin and review</button>}</>}
+        </div>}
+        {error && <p className="map-error" role="alert">{error} Check staff sign-in and the backend API.</p>}{message && <p className="map-success" role="status">{message}</p>}
+        <div className="map-result-list">{(ready ? visible : filtered).map((item) => <button type="button" className={`map-result-card${selectedId === item.id ? ' is-selected' : ''}`} key={item.id} onClick={() => select(item)}><div className="map-result-card__image">⌂</div><span><b>{item.title}</b><small>{item.location} · {item.status}</small><strong>₱ {Number(item.price).toLocaleString('en-PH')}</strong></span></button>)}{!loading && !filtered.length && <p className="map-empty">No listings match these filters.</p>}</div>
+      </div>
+    </aside>
+    <div className="fullscreen-map-canvas"><PropertyMap listings={filtered} fullscreen panelCollapsed={!panelOpen} height="100%" mode={role === 'admin' && editingPin ? 'pick' : 'browse'} pin={role === 'admin' && editingPin ? pin : null} onPinChange={setPin} radiusKm={radius} onRadiusChange={(value) => setParam('radius', String(value))} selectedListingId={selectedId} onListingSelect={select} onVisibleListingsChange={onVisible} /></div>
+  </main>;
+}
+

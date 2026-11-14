@@ -9,6 +9,9 @@ import AgentListings from "./agent/pages/listings/AgentListings";
 import AgentAddListing from "./agent/pages/add-listing/AgentAddListing";
 import AgentListingDetails from "./agent/pages/listing-details/AgentListingDetails";
 import AgentWorkspacePage from "./agent/pages/workspace/AgentWorkspacePage";
+import PropertyMapPage from "./shared/maps/PropertyMapPage";
+import StaffGate from "./shared/maps/StaffGate";
+import StaffMapPage from "./shared/maps/StaffMapPage";
 
 const AppRoutes = createBrowserRouter([
     // ------- Root page where the auth gate should be placed -------
@@ -21,34 +24,27 @@ const AppRoutes = createBrowserRouter([
     
 
     // start of RBAC architecture kaya much better if organized ang kada file structuring niyo 
-    {
-        // root path for each specific role
-        path: "/admin",
-        // The specific opening page you want to render   
-        Component: AdminDashboard,
-        // the other pages under the root role you want to connect  
-    },
-    {
-        path: "/admin/listing-reviews",
-        Component: AdminListingReview
-    },
-    {
-        path: "/admin/agent-reviews",
-        Component: AdminAgentReview
-    },
+    { path: "/admin", element: <StaffGate role="admin" />, children: [
+      { index: true, Component: AdminDashboard },
+      { path: "listing-reviews", Component: AdminListingReview },
+      { path: "map", Component: () => <StaffMapPage role="admin" /> },
+      { path: "agent-reviews", Component: AdminAgentReview },
+    ] },
 
 
 
 
     {
         path: "/visitor",
-        element: <h3>Place main visitor page component route in ./AppRoutes.tsx</h3>
+        Component: () => <PropertyMapPage role="visitor" mode="list" />
     },
+    { path: "/visitor/map", Component: () => <PropertyMapPage role="visitor" mode="map" /> },
 
     {
         path: "/buyer",
-        element: <h3>Place main buyer page component route in ./AppRoutes.tsx </h3>
+        Component: () => <PropertyMapPage role="buyer" mode="list" />
     },
+    { path: "/buyer/map", Component: () => <PropertyMapPage role="buyer" mode="map" /> },
 
     {
         path: "/agent",
@@ -58,6 +54,7 @@ const AppRoutes = createBrowserRouter([
             { path: "dashboard", Component: AgentDashboard },
             { path: "my-listings/:listingId", Component: AgentListingDetails },
             { path: "my-listings", Component: AgentListings },
+            { path: "map", Component: () => <StaffMapPage role="agent" /> },
             { path: "add-listings", Component: AgentAddListing },
             { path: "viewings", Component: AgentWorkspacePage },
             { path: "activity", Component: AgentWorkspacePage },

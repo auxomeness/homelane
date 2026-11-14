@@ -1,9 +1,10 @@
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react';
-import { ArrowLeft, ArrowRight, MapPin, UploadCloud } from 'lucide-react';
+import { ArrowLeft, ArrowRight, MapPin as MapPinIcon, UploadCloud } from 'lucide-react';
 import { useNavigate, useSearchParams } from 'react-router';
 import Button from '../../../components/button.js';
 import { useAgentData } from '../../libs/AgentDataContext.js';
 import type { AgentListingData } from '../../libs/listData.js';
+import PropertyMap, { type MapPin as MapPinData } from '../../../shared/maps/PropertyMap.js';
 import './addListingStyles.css';
 
 const propertyTypes = ['House', 'Condo', 'Townhouse', 'Lot'];
@@ -40,12 +41,14 @@ export default function AgentAddListing() {
   const { listings, createListing, updateListing } = useAgentData();
   const listingToEdit = listings.find((listing) => listing.id === editId);
   const [form, setForm] = useState<ListingForm>(listingToEdit ? toForm(listingToEdit) : initialForm);
+  const [pin, setPin] = useState<MapPinData | null>(listingToEdit && listingToEdit.latitude != null && listingToEdit.longitude != null ? { latitude: listingToEdit.latitude, longitude: listingToEdit.longitude } : null);
   const [step, setStep] = useState<'details' | 'preview'>('details');
   const [error, setError] = useState('');
 
   useEffect(() => {
     setForm(listingToEdit ? toForm(listingToEdit) : initialForm);
     setStep('details');
+    setPin(listingToEdit && listingToEdit.latitude != null && listingToEdit.longitude != null ? { latitude: listingToEdit.latitude, longitude: listingToEdit.longitude } : null);
   }, [editId, listingToEdit]);
 
   const change = (field: keyof ListingForm, value: string) => setForm((current) => ({ ...current, [field]: value }));
@@ -82,13 +85,15 @@ export default function AgentAddListing() {
     bedrooms: form.bedrooms ? Number(form.bedrooms) : undefined,
     bathrooms: form.bathrooms ? Number(form.bathrooms) : undefined,
     floorArea: form.floorArea ? Number(form.floorArea) : undefined,
+    latitude: pin?.latitude,
+    longitude: pin?.longitude,
   });
 
-  const save = (submitForReview: boolean) => {
+  const save = async (submitForReview: boolean) => {
+    if (!pin) { setError('Choose the exact property pin on the map before saving.'); setStep('details'); return; }
     const draft = toDraft();
-    if (editId && listingToEdit) updateListing(editId, draft, submitForReview);
-    else createListing(draft, submitForReview);
-    navigate('/agent/my-listings');
+    try { if (editId && listingToEdit) await updateListing(editId, draft as Parameters<typeof updateListing>[1], submitForReview); else await createListing(draft as Parameters<typeof createListing>[0], submitForReview); navigate('/agent/my-listings'); }
+    catch (reason) { setError(reason instanceof Error ? reason.message : 'Unable to save the listing.'); }
   };
 
   const continueToPreview = (event: FormEvent<HTMLFormElement>) => {
@@ -148,17 +153,17 @@ export default function AgentAddListing() {
           <textarea id="listing-description" className="agent-form-textarea" value={form.description} onChange={(event) => change('description', event.target.value)} minLength={20} maxLength={2000} placeholder="Describe the property, its features, and nearby amenities…" required />
         </section>
 
-        <section className="agent-form-section agent-form-facts"><h2>Submission</h2><p>Save this as a draft, or continue to review your details before submitting it for admin review.</p></section>
+        <section className="agent-form-section agent-form-facts"><h2>Exact property location <span className="agent-form-optional">Required</span></h2><p>Place the exact public map pin for this property. Click or drag the pin to adjust.</p><PropertyMap listings={[]} mode="pick" pin={pin} onPinChange={setPin} allowRoute={false} height={360} /></section>
         {error && <p className="agent-form-error" role="alert">{error}</p>}
         <div className="agent-add-listing__actions"><Button className="agent-button agent-button--secondary" variant="secondary" type="button" onClick={() => save(false)}>Save draft</Button><Button className="agent-button agent-button--primary agent-add-listing__next" size="medium" type="submit"><span>Continue to map and preview</span><ArrowRight size={17} /></Button></div>
       </form> : <div className="agent-add-listing__form agent-listing-preview">
         <section className="agent-form-section agent-listing-preview__main">
           {form.photos[0] ? <img className="agent-listing-preview__hero" src={form.photos[0]} alt={`${form.title} preview`} /> : <div className="agent-listing-preview__hero agent-listing-preview__hero--empty">Property cover preview</div>}
-          <span className="agent-status-pill agent-status-pill--pending">Pending review</span><h2>{form.title}</h2><p><MapPin size={16} />{form.location}</p><strong>₱ {Number(form.price).toLocaleString('en-PH')}</strong><p>{form.description}</p>
+          <span className="agent-status-pill agent-status-pill--pending">Pending review</span><h2>{form.title}</h2><p><MapPinIcon size={16} />{form.location}</p><strong>₱ {Number(form.price).toLocaleString('en-PH')}</strong><p>{form.description}</p>
           <div className="agent-listing-preview__facts"><span>{form.propertyType}</span>{form.bedrooms && <span>{form.bedrooms} bedrooms</span>}{form.bathrooms && <span>{form.bathrooms} bathrooms</span>}{form.floorArea && <span>{form.floorArea} m²</span>}</div>
           {form.photos.length > 1 && <div className="agent-photo-previews">{form.photos.slice(1).map((photo, index) => <figure key={`preview-${index}`}><img src={photo} alt={`${form.title} photo ${index + 2}`} /></figure>)}</div>}
         </section>
-        <section className="agent-form-section agent-map-preview"><MapPin size={24} /><div><h2>Map preview</h2><p>{form.location}</p><a href={`https://www.openstreetmap.org/search?query=${encodeURIComponent(form.location)}`} target="_blank" rel="noreferrer">Open this location on a map</a></div></section>
+        <section className="agent-form-section agent-map-preview"><MapPinIcon size={24} /><div><h2>Exact map pin</h2><p>{pin ? `${pin.latitude.toFixed(6)}, ${pin.longitude.toFixed(6)}` : form.location}</p></div><PropertyMap listings={[]} mode="pick" pin={pin} onPinChange={setPin} allowRoute={false} height={320} /></section>
         <div className="agent-add-listing__actions"><Button className="agent-button agent-button--secondary" variant="secondary" onClick={() => setStep('details')}><ArrowLeft size={17} />Back to details</Button><Button className="agent-button agent-button--secondary" variant="secondary" onClick={() => save(false)}>Save draft</Button><Button className="agent-button agent-button--primary" size="medium" onClick={() => save(true)}>Submit for review</Button></div>
       </div>}
     </main>
