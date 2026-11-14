@@ -14,6 +14,8 @@ export interface AgentListingData {
   bedrooms?: number;
   bathrooms?: number;
   floorArea?: number;
+  latitude?: number;
+  longitude?: number;
 }
 
 export const agentListings: AgentListingData[] = [

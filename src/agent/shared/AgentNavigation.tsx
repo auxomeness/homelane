@@ -1,7 +1,7 @@
-import { Eye, LayoutDashboard, List, Plus } from 'lucide-react';
+import { Eye, LayoutDashboard, List, Map, Plus } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
-export type AgentScreen = 'dashboard' | 'listings' | 'addListing' | 'viewings';
+export type AgentScreen = 'dashboard' | 'listings' | 'addListing' | 'viewings' | 'map';
 
 interface AgentNavigationProps {
   screen: AgentScreen | null;
@@ -11,6 +11,7 @@ interface AgentNavigationProps {
 const navItems: { label: string; screen: AgentScreen; icon: LucideIcon }[] = [
   { label: 'Overview', screen: 'dashboard', icon: LayoutDashboard },
   { label: 'My listings', screen: 'listings', icon: List },
+  { label: 'Map', screen: 'map', icon: Map },
   { label: 'Add listing', screen: 'addListing', icon: Plus },
   { label: 'Viewings', screen: 'viewings', icon: Eye },
 ];

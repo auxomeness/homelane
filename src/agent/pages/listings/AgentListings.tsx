@@ -1,9 +1,10 @@
-import { useMemo, useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useEffect, useMemo, useState } from 'react';
+import { Link, useNavigate, useSearchParams } from 'react-router';
 import Button from '../../../components/button.js';
 import AgentListingCard from '../../components/listings/AgentListingCard.js';
 import { useAgentData } from '../../libs/AgentDataContext.js';
 import type { AgentListingStatus } from '../../libs/listData.js';
+import PriceRangeSelect from '../../../shared/maps/PriceRangeSelect.js';
 import './listingsStyles.css';
 
 const filters: { label: string; status: AgentListingStatus | 'all' }[] = [
@@ -16,11 +17,16 @@ const filters: { label: string; status: AgentListingStatus | 'all' }[] = [
 
 export default function AgentListings() {
   const navigate = useNavigate();
-  const { listings } = useAgentData();
-  const [filter, setFilter] = useState<AgentListingStatus | 'all'>('all');
+  const [params, setParams] = useSearchParams();
+  const { listings, loading, error, reload } = useAgentData();
+  const filter = (params.get('status') ?? 'all') as AgentListingStatus | 'all';
+  const search = params.get('q') ?? ''; const type = params.get('type') ?? 'all'; const min = params.get('min') ?? ''; const max = params.get('max') ?? '';
   const [page, setPage] = useState(1);
+  useEffect(() => setPage(1), [filter, max, min, search, type]);
   const pageSize = 6;
-  const filteredListings = useMemo(() => listings.filter((listing) => filter === 'all' || listing.status === filter), [filter, listings]);
+  const setParam = (key: string, value: string) => setParams((old) => { const next = new URLSearchParams(old); if (value) next.set(key, value); else next.delete(key); return next; }, { replace: true });
+  const setPriceRange = (min: string, max: string) => setParams((old) => { const next = new URLSearchParams(old); min ? next.set('min', min) : next.delete('min'); max ? next.set('max', max) : next.delete('max'); return next; }, { replace: true });
+  const filteredListings = useMemo(() => listings.filter((listing) => (filter === 'all' || listing.status === filter) && `${listing.title} ${listing.location}`.toLowerCase().includes(search.trim().toLowerCase()) && (type === 'all' || (listing.propertyType ?? 'House').toLowerCase() === type.toLowerCase()) && (!min || Number(listing.price.replace(/[^\d.]/g, '')) >= Number(min)) && (!max || Number(listing.price.replace(/[^\d.]/g, '')) <= Number(max))), [filter, listings, max, min, search, type]);
   const pageCount = Math.max(1, Math.ceil(filteredListings.length / pageSize));
   const visibleListings = filteredListings.slice((page - 1) * pageSize, page * pageSize);
 
@@ -45,7 +51,7 @@ export default function AgentListings() {
                 className={filter === item.status ? 'is-selected' : ''}
                 aria-pressed={filter === item.status}
                 key={item.status}
-                onClick={() => { setFilter(item.status); setPage(1); }}
+                onClick={() => { setParam('status', item.status === 'all' ? '' : item.status); setPage(1); }}
               >
                 {item.label}
               </button>
@@ -53,6 +59,10 @@ export default function AgentListings() {
           </div>
           <p>{filteredListings.length} {filteredListings.length === 1 ? 'property' : 'properties'}</p>
         </div>
+        <div className="agent-listing-view-switch" role="group" aria-label="Listing view"><button type="button" aria-pressed="true">List view</button><Link to={`/agent/map${params.size ? `?${params}` : ''}`}>Map view</Link></div>
+        <div className="agent-listing-filters agent-listing-filters--fields"><label>Search<input value={search} onChange={(event) => setParam('q', event.target.value)} placeholder="Title or location" /></label><label>Property type<select value={type} onChange={(event) => setParam('type', event.target.value === 'all' ? '' : event.target.value)}><option value="all">All types</option>{['House','Condo','Townhouse','Lot'].map((item) => <option key={item}>{item}</option>)}</select></label><PriceRangeSelect min={min} max={max} onChange={setPriceRange} /></div>
+        {error && <p role="alert" className="agent-empty-state">{error} <button type="button" onClick={() => void reload()}>Retry</button></p>}
+        {loading && <p className="agent-empty-state">Loading your listings…</p>}
         <div className="agent-listings-list">
           {visibleListings.map((listing) => (
             <AgentListingCard key={listing.id} listing={listing} onAction={() => navigate(`/agent/my-listings/${listing.id}`)} />

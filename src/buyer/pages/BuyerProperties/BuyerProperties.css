@@ -20,8 +20,8 @@
 
 .buyer-properties__filter { position: relative; display: inline-flex; min-width: 82px; min-height: 34px; align-items: center; justify-content: center; gap: 7px; padding: 0 13px; border: 1px solid var(--buyer-primary); border-radius: var(--buyer-radius-pill); background: var(--buyer-primary); color: #fff; font-size: 10px; font-weight: 600; cursor: pointer; }
 
-.buyer-properties__filter.is-active { 
-  background: var(--buyer-deep-purple); 
+.buyer-properties__filter.is-active {
+  background: var(--buyer-deep-purple);
 }
 
 .buyer-properties__filter select { position: absolute; inset: 0; width: 100%; height: 100%; appearance: none; opacity: 0; cursor: pointer; }

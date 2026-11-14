@@ -1,0 +1,13 @@
+.staff-login,.public-map-page { min-height: 100vh; padding: clamp(24px,5vw,72px); background: #fbf9fc; color: #251e2b; }
+.staff-login { display: grid; place-items: center; }
+.staff-login form { display: grid; gap: 16px; width: min(100%, 420px); padding: 34px; border: 1px solid #ebe7f0; border-radius: 24px; background: white; box-shadow: 0 18px 48px #251e2b12; }
+.staff-login h1,.public-map-page h1 { color: #241d4d; }
+.staff-login form>p:not(.staff-login__eyebrow) { color: #77717e; }
+.staff-login__eyebrow,.public-map-page header>p { color: #6c4a8b; font-size: .8rem; font-weight: 700; letter-spacing: .12em; }
+.staff-login label { display: grid; gap: 7px; font-weight: 600; }
+.staff-login input { min-height: 44px; padding: 10px 12px; border: 1px solid #ded9e7; border-radius: 10px; font: inherit; }
+.staff-login button { min-height: 46px; border: 0; border-radius: 12px; background: #241d4d; color: white; font: inherit; font-weight: 700; cursor: pointer; }
+.staff-login-error { padding: 12px; border-radius: 10px; background: #fff0ed; color: #8a4936; }
+.public-map-page { display: grid; align-content: start; gap: 24px; }
+.public-map-page header { display: grid; gap: 8px; }
+.public-map-page header>span { color: #77717e; }

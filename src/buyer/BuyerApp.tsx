@@ -30,4 +30,3 @@ export function BuyerRoutePlaceholder({ title }: { title: string }) {
 export function BuyerIndexRedirect() {
   return <Navigate to="home" replace />;
 }
-
