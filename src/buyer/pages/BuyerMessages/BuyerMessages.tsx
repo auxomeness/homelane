@@ -2,7 +2,7 @@ import './BuyerMessages.css';
 import { useMemo, useState, type FormEvent } from 'react';
 import { ArrowLeft, MessageSquare, Send } from 'lucide-react';
 import { useNavigate } from 'react-router';
-import Button from '../../components/button.js';
+import Button from '../../../components/button.js';
 
 type Message = {
   id: number;

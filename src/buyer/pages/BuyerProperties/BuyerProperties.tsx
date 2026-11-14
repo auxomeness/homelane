@@ -1,9 +1,9 @@
 import './BuyerProperties.css';
 import { useMemo, useState, type ChangeEvent } from 'react';
 import { ChevronDown, Search, X } from 'lucide-react';
-import Card from '../components/PropertyCard.js';
+import Card from '../../components/PropertyCard.js';
 import { useSearchParams } from 'react-router';
-import { buyerListings, type PropertyType } from '../data/listings.js';
+import { buyerListings, type PropertyType } from '../../data/listings.js';
 
 type PriceRange = 'all' | 'under-5m' | '5m-10m' | 'over-10m';
 type TypeFilter = 'all' | PropertyType;

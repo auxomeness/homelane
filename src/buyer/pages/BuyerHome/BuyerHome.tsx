@@ -2,8 +2,8 @@ import './BuyerHome.css';
 import { useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { ArrowRight, Search } from 'lucide-react';
-import Card from '../components/PropertyCard.js';
-import { buyerListings, type PropertyType } from '../data/listings.js';
+import Card from '../../components/PropertyCard.js';
+import { buyerListings, type PropertyType } from '../../data/listings.js';
 
 const searchShortcuts: { title: string; type: PropertyType; description: string }[] = [
   { title: 'Houses', type: 'House', description: 'Room to make yourself at home' },
