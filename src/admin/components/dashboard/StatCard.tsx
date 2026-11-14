@@ -16,7 +16,7 @@ export default function StatCard({
     icon: Icon
 }: StatCardProps) {
     return (
-        <div className="card-container">
+        <section className="card-container">
             <div className="card-title">
                 <Icon size={20}/>
                 <h4>{label}</h4>
@@ -30,6 +30,6 @@ export default function StatCard({
                     <MoveRight size={15}/>
                 </Link>    
             </div>
-        </div>
+        </section>
     );
 }

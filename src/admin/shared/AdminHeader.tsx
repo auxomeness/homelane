@@ -25,7 +25,7 @@ const headerIcons: headerIcon[] = [
 
 export default function AdminHeader() {
     return (
-        <header>
+        <header id='admin-header'>
             <h3 id='header-title'>HOMELANE</h3>
 
             <div className="right-header">

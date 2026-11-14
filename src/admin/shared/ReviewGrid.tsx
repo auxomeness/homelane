@@ -1,23 +1,55 @@
-import "./sharedStyles.css"
 
-import Status, { type StatusType } from "./Status";
+import { Link } from 'react-router';
+import './sharedStyles.css'
+import Status from './Status';
+import type { AgentReviewGridProps, ListReviewGridProps } from '../libs/listData';
 
-interface ReviewGridProps {
-    image: string,
-    title: string;
-    location: string;
-    intPrice: number;
-    status: StatusType;
+
+
+
+export function AgentReviewGrid( {
+    image,
+    name,
+    location,
+    submission,
+    status
+}: AgentReviewGridProps) {
+    return(
+        <Link to={'/'}>
+        <section className="review-container">
+                        <div className="review-name">
+                            <div className="review-name-image">
+                            {image}
+                            </div>
+                            <h3>{name}</h3>
+                        </div>
+        
+                            <div className="review-location">
+                                {location}
+                            </div>
+        
+                            <div className="review-price">
+                                <p>Submitted on {submission} </p>
+                            </div>
+        
+                            <div className="review-status">
+                                <Status status={status}/>
+                            </div>
+        
+                    </section>
+        </Link>
+    );
 }
 
 
-export default function ReviewGrid({
+
+export function ListReviewGrid({
     image,
     title,
     location,
     intPrice,
     status,
-}: ReviewGridProps) {
+}: ListReviewGridProps) {
 
     // format for pricing
     const formattedNumber = Intl.NumberFormat("en-US", {
@@ -26,7 +58,8 @@ export default function ReviewGrid({
     ).format(intPrice)
 
     return(
-            <div className="review-container">
+        <Link to={'/'}>
+            <section className="review-container">
                 <div className="review-name">
                     <div className="review-name-image">
                     {image}
@@ -46,6 +79,7 @@ export default function ReviewGrid({
                         <Status status={status}/>
                     </div>
 
-            </div>
+            </section>
+        </Link>
     );
 }

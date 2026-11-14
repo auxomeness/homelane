@@ -17,7 +17,7 @@ export default function ListGrid({
     status
 }: ListGridProps) {
     return(
-        <div className="grid-container">
+        <article className="grid-container">
            
             <div className="grid-logo listing">
                 { image }
@@ -35,6 +35,6 @@ export default function ListGrid({
             <div>
                 <Status status={status} />
             </div>
-        </div>
+        </article>
     );
 }

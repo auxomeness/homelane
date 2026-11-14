@@ -18,7 +18,7 @@ export default function AgentGrid({
     status
 }: AgentGridProps) {
     return(
-        <div className="grid-container">
+        <section className="grid-container">
            
             <div className="grid-logo">
                 { image }
@@ -36,6 +36,6 @@ export default function AgentGrid({
             <div>
                 <Status status={status} />
             </div>
-        </div>
+        </section>
     );
 }

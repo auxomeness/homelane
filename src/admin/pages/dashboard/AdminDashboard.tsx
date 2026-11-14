@@ -7,14 +7,14 @@ import './dashboardPageStyles.css'
 
 import AgentGrid from '../../components/dashboard/AgentGrid';
 import ListGrid from '../../components/dashboard/ListGrid';
-import { Agents, Lists, listData } from '../../libs/listData';
+import { Agents, listData } from '../../libs/listData';
 
 import { Link, Outlet } from 'react-router';
 
 
 export default function AdminDashboard() {
     return(
-        <div className='admin-container'>
+        <main className='admin-container'>
             <AdminHeader/>
             <AdminNavigation/>
 
@@ -39,27 +39,33 @@ export default function AdminDashboard() {
                             </Link>
 
                         ))}
+
+                        {(Agents.length as number) === 0 && <p className="review-empty">No agent reviews pending.</p>}
+
                     </div>
 
                 </section>
 
                 <section className='admin-reviews'>
-                    <div>
+                    <article>
                         <h2>Listing reviews</h2>
 
 
-                        {Lists.map((list) => (
+                        {listData.map((list) => (
 
-                            <Link key={list.name} to="/admin/listing-reviews" className='card-list'>
-                            <ListGrid image={ list.image } name={ list.name } title={ list.title } location={ list.location } status={ list.status }/>
+                            <Link key={list.title} to="/admin/listing-reviews" className='card-list'>
+                            <ListGrid image={ list.image } name={ list.title } title={ list.title } location={ list.location } status={ list.status }/>
                             </Link>
 
                         ))}
-                    </div>
+                        
+                        {listData.length === 0 && <p className="review-empty">No listing reviews pending.</p>}
+
+                    </article>
                 </section>
             </article>
 
             <Outlet/>
-        </div>
+        </main>
     );
 }

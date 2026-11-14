@@ -12,12 +12,10 @@ const navItems: NavItem[] = [
     { label: 'Listing reviews', path: 'listing-reviews' },
     { label: 'Map', path: 'map' },
     { label: 'Agent reviews', path: 'agent-reviews' },
-    { label: 'Viewings', path: 'viewings' }
 ]
 
 export default function AdminNavigation() {
     return(
-        <>
         <nav id='admin-nav'>
             <div className="nav-title">
                 <h3>Workspace</h3>
@@ -36,6 +34,5 @@ export default function AdminNavigation() {
                 ))}
             </div>
         </nav>
-        </>
     );
 }
