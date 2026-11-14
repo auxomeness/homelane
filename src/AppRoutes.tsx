@@ -9,61 +9,77 @@ import AgentListings from "./agent/pages/listings/AgentListings";
 import AgentAddListing from "./agent/pages/add-listing/AgentAddListing";
 import AgentListingDetails from "./agent/pages/listing-details/AgentListingDetails";
 import AgentWorkspacePage from "./agent/pages/workspace/AgentWorkspacePage";
+import DiscoveryApp, { DiscoveryIndexRedirect, DiscoveryPlaceholder } from "./discovery/DiscoveryApp";
+import MapDiscovery from "./discovery/pages/MapDiscovery";
+import Messages from "./discovery/pages/Messages";
+import Notifications from "./discovery/pages/Notifications";
+import Viewings from "./discovery/pages/Viewings";
 import PropertyMapPage from "./shared/maps/PropertyMapPage";
 import StaffGate from "./shared/maps/StaffGate";
 import StaffMapPage from "./shared/maps/StaffMapPage";
 
 const AppRoutes = createBrowserRouter([
-    // ------- Root page where the auth gate should be placed -------
-    {
-        path: "/",
-        element:<App/>
-    },
-
-
-    
-
-    // start of RBAC architecture kaya much better if organized ang kada file structuring niyo 
-    { path: "/admin", element: <StaffGate role="admin" />, children: [
+  {
+    path: "/",
+    element: <App />,
+  },
+  {
+    path: "/admin",
+    Component: () => <StaffGate role="admin" />,
+    children: [
       { index: true, Component: AdminDashboard },
       { path: "listing-reviews", Component: AdminListingReview },
       { path: "map", Component: () => <StaffMapPage role="admin" /> },
       { path: "agent-reviews", Component: AdminAgentReview },
-    ] },
-
-
-
-
-    {
-        path: "/visitor",
-        Component: () => <PropertyMapPage role="visitor" mode="list" />
-    },
-    { path: "/visitor/map", Component: () => <PropertyMapPage role="visitor" mode="map" /> },
-
-    {
-        path: "/buyer",
-        Component: () => <PropertyMapPage role="buyer" mode="list" />
-    },
-    { path: "/buyer/map", Component: () => <PropertyMapPage role="buyer" mode="map" /> },
-
-    {
-        path: "/agent",
-        Component: AgentApp,
-        children: [
-            { index: true, Component: AgentIndexRedirect },
-            { path: "dashboard", Component: AgentDashboard },
-            { path: "my-listings/:listingId", Component: AgentListingDetails },
-            { path: "my-listings", Component: AgentListings },
-            { path: "map", Component: () => <StaffMapPage role="agent" /> },
-            { path: "add-listings", Component: AgentAddListing },
-            { path: "viewings", Component: AgentWorkspacePage },
-            { path: "activity", Component: AgentWorkspacePage },
-            { path: "inquiries", Component: AgentWorkspacePage },
-            { path: "messages", Component: AgentWorkspacePage },
-            { path: "profile", Component: AgentWorkspacePage }
-        ]
-    }
-
+    ],
+  },
+  {
+    path: "/visitor",
+    Component: () => <PropertyMapPage role="visitor" mode="list" />,
+  },
+  {
+    path: "/visitor/map",
+    Component: () => <PropertyMapPage role="visitor" mode="map" />,
+  },
+  {
+    path: "/buyer",
+    Component: () => <PropertyMapPage role="buyer" mode="list" />,
+  },
+  {
+    path: "/buyer/map",
+    Component: () => <PropertyMapPage role="buyer" mode="map" />,
+  },
+  {
+    path: "/discovery",
+    Component: DiscoveryApp,
+    children: [
+      { index: true, Component: DiscoveryIndexRedirect },
+      { path: "map", Component: MapDiscovery },
+      { path: "messages", Component: Messages },
+      { path: "notifications", Component: Notifications },
+      { path: "viewings", Component: Viewings },
+      { path: "home", element: <DiscoveryPlaceholder title="Home" /> },
+      { path: "properties", element: <DiscoveryPlaceholder title="Properties" /> },
+      { path: "*", Component: DiscoveryIndexRedirect },
+    ],
+  },
+  {
+    path: "/agent",
+    Component: AgentApp,
+    children: [
+      { index: true, Component: AgentIndexRedirect },
+      { path: "dashboard", Component: AgentDashboard },
+      { path: "my-listings/:listingId", Component: AgentListingDetails },
+      { path: "my-listings", Component: AgentListings },
+      { path: "map", Component: () => <StaffMapPage role="agent" /> },
+      { path: "add-listings", Component: AgentAddListing },
+      { path: "viewings", Component: AgentWorkspacePage },
+      { path: "activity", Component: AgentWorkspacePage },
+      { path: "inquiries", Component: AgentWorkspacePage },
+      { path: "messages", Component: AgentWorkspacePage },
+      { path: "profile", Component: AgentWorkspacePage },
+    ],
+  },
 ]);
 
 export default AppRoutes;

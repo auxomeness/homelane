@@ -1,0 +1,512 @@
+.buyer-messages__layout {
+  display: grid;
+  grid-template-columns: minmax(350px, 0.8fr) minmax(0, 1.2fr);
+  height: min(650px, calc(100vh - 250px));
+  min-height: 500px;
+  overflow: hidden;
+  border: 1px solid var(--buyer-border);
+  border-radius: var(--buyer-radius-card);
+  background: var(--buyer-surface);
+  box-shadow: var(--buyer-card-shadow);
+}
+
+.buyer-inbox {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  border-right: 1px solid var(--buyer-border);
+  background: var(--buyer-surface);
+}
+
+.buyer-inbox__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 66px;
+  padding: 13px 18px;
+  border-bottom: 1px solid var(--buyer-border);
+}
+
+.buyer-inbox__filters {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.buyer-inbox__count {
+  color: var(--buyer-muted);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.buyer-inbox__list {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.buyer-conversation {
+  display: flex;
+  width: 100%;
+  min-height: 84px;
+  align-items: center;
+  gap: 13px;
+  padding: 12px 13px;
+  border: 1px solid var(--buyer-border);
+  border-radius: var(--buyer-radius-card);
+  background: var(--buyer-surface);
+  color: inherit;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  transition: border-color .16s ease, background .16s ease, box-shadow .16s ease;
+}
+
+.buyer-conversation:hover, .buyer-conversation.is-selected {
+  border-color: #b8c2d9;
+  background: var(--buyer-surface);
+  box-shadow: 0 3px 9px rgba(31,39,71,.05);
+}
+
+.buyer-conversation__avatar, .buyer-thread__avatar {
+  display: grid;
+  flex: none;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--buyer-primary);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.buyer-conversation__avatar {
+  width: 42px;
+  height: 42px;
+}
+
+.buyer-conversation__body {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.buyer-conversation__topline {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.buyer-conversation__topline strong {
+  overflow: hidden;
+  color: var(--buyer-ink);
+  font-size: 12px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.buyer-conversation__topline time {
+  flex: none;
+  color: var(--buyer-muted);
+  font-size: 10px;
+}
+
+.buyer-conversation__property {
+  overflow: hidden;
+  color: var(--buyer-body);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.buyer-conversation__preview {
+  overflow: hidden;
+  color: var(--buyer-muted);
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.buyer-conversation__preview.is-unread {
+  color: var(--buyer-ink);
+  font-weight: 700;
+}
+
+.buyer-conversation__unread {
+  display: grid;
+  width: 19px;
+  height: 19px;
+  flex: none;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--buyer-primary);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.buyer-inbox__no-results {
+  margin: 20px 10px;
+  color: var(--buyer-muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.buyer-thread {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  background: var(--buyer-page);
+}
+
+.buyer-empty-state {
+  display: flex;
+  width: min(100%, 390px);
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  padding: 38px 28px;
+  text-align: center;
+}
+
+.buyer-empty-state__icon {
+  display: grid;
+  width: 82px;
+  height: 82px;
+  place-items: center;
+  margin-bottom: 17px;
+  border-radius: 50%;
+  background: var(--buyer-lavender);
+  color: var(--buyer-primary);
+}
+
+.buyer-empty-state h2 {
+  margin: 0;
+  color: var(--buyer-ink);
+  font-size: 15px;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.buyer-empty-state p {
+  max-width: 300px;
+  margin: 7px 0 20px;
+  color: var(--buyer-body);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.buyer-app .buyer-empty-state__button.btn {
+  min-width: 190px;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: var(--buyer-radius-control);
+  background: var(--buyer-primary);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.buyer-app .buyer-empty-state__button.btn:hover {
+  background: var(--brand-purple-hover);
+}
+
+.buyer-thread__header {
+  display: flex;
+  min-height: 78px;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border: 0;
+  border-bottom: 1px solid var(--buyer-border);
+  border-radius: 0;
+  background: var(--buyer-surface);
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.buyer-thread__back {
+  display: none;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--buyer-ink);
+  cursor: pointer;
+}
+
+.buyer-thread__avatar {
+  width: 42px;
+  height: 42px;
+}
+
+.buyer-thread__identity {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.buyer-thread__identity strong {
+  overflow: hidden;
+  color: var(--buyer-ink);
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.buyer-thread__identity span {
+  overflow: hidden;
+  color: var(--buyer-muted);
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.buyer-thread__property-link {
+  flex: none;
+  padding: 8px 12px;
+  border: 1px solid var(--buyer-border);
+  border-radius: var(--buyer-radius-pill);
+  background: var(--buyer-surface);
+  color: var(--buyer-primary);
+  font: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.buyer-thread__timeline {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  padding: 24px clamp(18px, 4vw, 54px);
+}
+
+.buyer-thread__property-note {
+  display: flex;
+  align-self: center;
+  flex-direction: column;
+  gap: var(--buyer-space-1);
+  margin: 0 0 5px;
+  padding: 10px 18px;
+  border: 1px solid var(--buyer-border);
+  border-radius: var(--buyer-radius-card);
+  background: var(--buyer-surface);
+  color: var(--buyer-muted);
+  text-align: center;
+  font-size: 10px;
+}
+
+.buyer-thread__property-note strong {
+  color: var(--buyer-ink);
+  font-size: 11px;
+}
+
+.buyer-message {
+  display: flex;
+  max-width: min(76%, 470px);
+  flex-direction: column;
+  gap: 5px;
+}
+
+.buyer-message--buyer {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.buyer-message--agent {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+
+.buyer-message p {
+  margin: 0;
+  padding: 11px 14px;
+  border-radius: var(--buyer-radius-card);
+  background: var(--buyer-surface);
+  color: var(--buyer-ink);
+  font-size: 12px;
+  line-height: 1.5;
+  box-shadow: 0 1px 3px rgba(31,39,71,.08);
+}
+
+.buyer-message--buyer p {
+  border-bottom-right-radius: 4px;
+  background: var(--buyer-primary);
+  color: #fff;
+}
+
+.buyer-message--agent p {
+  border: 1px solid var(--buyer-border);
+  border-bottom-left-radius: var(--buyer-space-1);
+}
+
+.buyer-message time, .buyer-message__sender {
+  color: var(--buyer-muted);
+  font-size: 9px;
+}
+
+.buyer-message__sender {
+  font-weight: 600;
+}
+
+.buyer-composer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  border-top: 1px solid var(--buyer-border);
+  background: var(--buyer-surface);
+}
+
+.buyer-composer input {
+  width: 100%;
+  min-width: 0;
+  height: 42px;
+  padding: 0 14px;
+  border: 1px solid var(--buyer-border);
+  border-radius: var(--buyer-radius-pill);
+  outline: none;
+  background: var(--buyer-page);
+  color: var(--buyer-ink);
+  font: inherit;
+  font-size: 11px;
+}
+
+.buyer-composer input:focus {
+  border-color: #9ba7c2;
+  box-shadow: 0 0 0 3px rgba(33,28,80,.08);
+}
+
+.buyer-app .buyer-composer__send.btn {
+  display: inline-flex;
+  min-width: 80px;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 14px;
+  border-radius: 22px;
+  background: var(--buyer-primary);
+  color: #fff;
+  font-size: 11px;
+}
+
+.buyer-app .buyer-composer__send.btn:disabled {
+  opacity: .48;
+}
+
+@media (max-width: 820px) {
+  .buyer-messages__layout {
+    display: block;
+    height: calc(100dvh - 214px);
+    min-height: 440px;
+    border-radius: var(--buyer-radius-card);
+  }
+  .buyer-inbox {
+    height: 100%;
+    border-right: 0;
+  }
+  .buyer-inbox__toolbar {
+    min-height: 57px;
+    padding: 10px 13px;
+  }
+  .buyer-inbox__list {
+    gap: 9px;
+    padding: 12px;
+  }
+  .buyer-conversation {
+    min-height: 78px;
+    gap: 11px;
+    padding: 10px;
+  }
+  .buyer-conversation__avatar {
+    width: 40px;
+    height: 40px;
+  }
+  .buyer-conversation__topline strong {
+    font-size: 11px;
+  }
+  .buyer-conversation__property {
+    font-size: 10px;
+  }
+  .buyer-conversation__preview {
+    font-size: 9px;
+  }
+  .buyer-thread {
+    display: none;
+    height: 100%;
+  }
+  .buyer-messages--conversation-open .buyer-inbox {
+    display: none;
+  }
+  .buyer-messages--conversation-open .buyer-thread {
+    display: flex;
+  }
+  .buyer-thread__header {
+    min-height: 66px;
+    gap: 8px;
+    padding: 9px 11px;
+  }
+  .buyer-thread__back {
+    display: grid;
+  }
+  .buyer-thread__avatar {
+    width: 36px;
+    height: 36px;
+    font-size: 10px;
+  }
+  .buyer-thread__property-link {
+    padding: 7px 9px;
+    font-size: 9px;
+  }
+  .buyer-thread__timeline {
+    gap: 13px;
+    padding: 15px 12px;
+  }
+  .buyer-message {
+    max-width: 88%;
+  }
+  .buyer-message p {
+    font-size: 11px;
+  }
+  .buyer-composer {
+    gap: 7px;
+    padding: 10px;
+  }
+  .buyer-composer input {
+    height: 38px;
+    padding: 0 12px;
+    font-size: 10px;
+  }
+  .buyer-app .buyer-composer__send.btn {
+    min-width: 42px;
+    min-height: 38px;
+    padding: 0 11px;
+  }
+  .buyer-app .buyer-composer__send span {
+    display: none;
+  }
+}
+
+@media (max-width: 390px) {
+  .buyer-inbox__count {
+    display: none;
+  }
+}

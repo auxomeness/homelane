@@ -1,0 +1,126 @@
+.buyer-workspace-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 48px;
+  margin-top: 17px;
+  padding: 0 20px;
+  border: 1px solid var(--buyer-border);
+  border-radius: var(--buyer-radius-card);
+  background: rgba(255,255,255,.92);
+}
+
+.buyer-workspace-nav__title {
+  color: var(--buyer-ink);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.buyer-nav {
+  display: flex;
+  align-items: stretch;
+  gap: 21px;
+  height: 46px;
+}
+
+.buyer-nav__item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--buyer-body);
+  font-size: 11px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.buyer-nav__icon {
+  display: none;
+}
+
+.buyer-nav__icon img {
+  display: block;
+}
+
+.buyer-nav__item.is-active {
+  color: var(--buyer-primary);
+  font-weight: 700;
+}
+
+.buyer-nav__item.is-active::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--buyer-primary);
+  content: '';
+}
+
+@media (max-width: 820px) {
+  .buyer-workspace-nav {
+    display: block;
+    min-height: 0;
+    margin-top: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+  .buyer-workspace-nav__title {
+    display: none;
+  }
+  .buyer-nav {
+    position: fixed;
+    z-index: 20;
+    right: 16px;
+    bottom: 12px;
+    left: 16px;
+    display: flex;
+    height: 64px;
+    align-items: center;
+    justify-content: space-around;
+    gap: 0;
+    padding: 4px 10px;
+    border: 1px solid rgba(255,255,255,.92);
+    border-radius: 36px;
+    background: rgba(255,255,255,.88);
+    box-shadow: 0 8px 24px rgba(24,29,55,.2);
+    backdrop-filter: blur(16px);
+  }
+  .buyer-nav__item {
+    display: flex;
+    min-width: 58px;
+    flex: 1;
+    flex-direction: column;
+    gap: 1px;
+    color: var(--buyer-primary);
+    font-size: 8px;
+  }
+  .buyer-nav__icon {
+    display: grid;
+    width: 40px;
+    height: 38px;
+    place-items: center;
+    border-radius: 22px;
+  }
+  .buyer-nav__label {
+    line-height: 11px;
+  }
+  .buyer-nav__item.is-active .buyer-nav__icon {
+    background: #fff;
+    box-shadow: 0 2px 7px rgba(31,39,71,.09);
+  }
+  .buyer-nav__item.is-active::after {
+    display: none;
+  }
+}
+
+@media (max-width: 390px) {
+  .buyer-nav {
+    right: 12px;
+    left: 12px;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+}
