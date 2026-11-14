@@ -1,8 +1,9 @@
-import { useNavigate } from 'react-router';
-import { discoveryPaths, type DiscoveryScreen } from './DiscoveryNavigation.js';
+import { useLocation, useNavigate } from 'react-router';
+import { getDiscoveryPath, type DiscoveryScreen } from './discoveryRoutes.js';
 
 // Returns a function that opens a Discovery screen through the shared React Router.
 export default function useDiscoveryNavigate() {
   const navigate = useNavigate();
-  return (screen: DiscoveryScreen) => navigate(discoveryPaths[screen]);
+  const location = useLocation();
+  return (screen: DiscoveryScreen) => navigate(getDiscoveryPath(screen, location.search));
 }

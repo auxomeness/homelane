@@ -37,9 +37,9 @@ export default function DiscoveryApp() {
 
   return (
     <div className="discovery-app">
-      <DiscoveryHeader onNavigate={navigate} />
+      {screen !== 'map' && <DiscoveryHeader onNavigate={navigate} />}
       <Outlet />
-      <DiscoveryNavigation screen={screen} onNavigate={navigate} />
+      {screen !== 'map' && <DiscoveryNavigation screen={screen} onNavigate={navigate} />}
     </div>
   );
 }

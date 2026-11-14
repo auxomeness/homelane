@@ -1,14 +1,6 @@
-export type DiscoveryScreen = 'home' | 'map' | 'viewings' | 'properties' | 'messages' | 'notifications';
+import type { DiscoveryScreen } from './discoveryRoutes.js';
 
-/** Route path of every Discovery screen. These match the routes in AppRoutes.tsx. */
-export const discoveryPaths: Record<DiscoveryScreen, string> = {
-  home: '/discovery/home',
-  map: '/discovery/map',
-  viewings: '/discovery/viewings',
-  properties: '/discovery/properties',
-  messages: '/discovery/messages',
-  notifications: '/discovery/notifications',
-};
+export type { DiscoveryScreen } from './discoveryRoutes.js';
 
 interface DiscoveryNavigationProps {
   screen: DiscoveryScreen;
